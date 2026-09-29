@@ -1,0 +1,47 @@
+{
+  "skill": "natspec",
+  "cases": [
+    {
+      "id": "c1",
+      "files": {"src/Portion.sol": "cases/c1.sol"},
+      "function": "portionOf",
+      "prompt": "The function portionOf in src/Portion.sol has no NatSpec. Write its NatSpec. Reply with the whole function, the NatSpec above it, as Solidity in one code block. Change no file.",
+      "expect": "@param amount: a token amount in the token's smallest unit. @param rate: a percentage, where 100 is 100%. @return: the portion, in the same token units as amount. Rounding: the result is rounded down (integer division)."
+    },
+    {
+      "id": "c2",
+      "files": {"src/Splitter.sol": "cases/c2.sol"},
+      "function": "split",
+      "prompt": "The function split in src/Splitter.sol has no NatSpec. Write its NatSpec. Reply with the whole function, the NatSpec above it, as Solidity in one code block. Change no file.",
+      "expect": "@param amount: a token amount in the token's smallest unit. @param rate: basis points, where 10,000 is 100%. Two @return tags: the first is what is left (amount minus the part), in token units; the second is the part, in token units. Rounding: the part is rounded up, so what is left is rounded down. Saying it reverts when rate is above 10,000 is a plus, not required."
+    },
+    {
+      "id": "c3",
+      "files": {"src/Vault.sol": "cases/c3.sol"},
+      "function": "convert",
+      "prompt": "The function convert in src/Vault.sol has no NatSpec. Write its NatSpec. Reply with the whole function, the NatSpec above it, as Solidity in one code block. Change no file.",
+      "expect": "@param assets: an amount of the asset token, in its smallest unit. @return: shares, with 18 decimals. Rounding: rounded down. Saying it reverts when totalAssets is 0 is a plus, not required."
+    },
+    {
+      "id": "c4",
+      "files": {"src/Accrual.sol": "cases/c4.sol"},
+      "function": "accrued",
+      "prompt": "The function accrued in src/Accrual.sol has no NatSpec. Write its NatSpec. Reply with the whole function, the NatSpec above it, as Solidity in one code block. Change no file.",
+      "expect": "@param principal: a token amount in the token's smallest unit. @param since: a Unix time in seconds. @return: the growth since that time, in the same token units as principal. Rounding: rounded down."
+    },
+    {
+      "id": "c5",
+      "files": {"src/Pricer.sol": "cases/c5.sol"},
+      "function": "quote",
+      "prompt": "The function quote in src/Pricer.sol has no NatSpec. Write its NatSpec. Reply with the whole function, the NatSpec above it, as Solidity in one code block. Change no file.",
+      "expect": "@param amountIn: an amount of the base token in its smallest unit (18 decimals). @return: the value in the quote token's smallest unit (6 decimals). Rounding: rounded down."
+    },
+    {
+      "id": "c6",
+      "files": {"src/Cut.sol": "cases/c6.sol"},
+      "function": "afterCut",
+      "prompt": "The function afterCut in src/Cut.sol has no NatSpec. Write its NatSpec. Reply with the whole function, the NatSpec above it, as Solidity in one code block. Change no file.",
+      "expect": "@param amount and @param cut: amounts of the same token, in its smallest unit. @return: amount minus cut, in the same unit. Rounding: none; the result is exact. An answer that states no rounding, or says nothing about rounding, earns 2 on rounding; one that claims any rounding earns 0. Saying it reverts when cut is above amount is a plus, not required."
+    }
+  ]
+}
