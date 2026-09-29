@@ -1,0 +1,202 @@
+[
+  {
+    "text": "go",
+    "refused": true,
+    "start": "go"
+  },
+  {
+    "text": "Go.",
+    "refused": true,
+    "start": "Go"
+  },
+  {
+    "text": "OK",
+    "refused": true,
+    "start": "OK"
+  },
+  {
+    "text": "okay!",
+    "refused": true,
+    "start": "okay"
+  },
+  {
+    "text": "LGTM",
+    "refused": true,
+    "start": "LGTM"
+  },
+  {
+    "text": "approved",
+    "refused": true,
+    "start": "approved"
+  },
+  {
+    "text": "Done: sent",
+    "refused": true,
+    "start": "Done:"
+  },
+  {
+    "text": "done : x",
+    "refused": true,
+    "start": "done:"
+  },
+  {
+    "text": "Later: after launch",
+    "refused": true,
+    "start": "Later:"
+  },
+  {
+    "text": "No: not now",
+    "refused": true,
+    "start": "No:"
+  },
+  {
+    "text": "Answer: yes",
+    "refused": true,
+    "start": "Answer:"
+  },
+  {
+    "text": "Move: 10/6",
+    "refused": true,
+    "start": "Move:"
+  },
+  {
+    "text": "Drop: x",
+    "refused": true,
+    "start": "Drop:"
+  },
+  {
+    "text": "Stop: x",
+    "refused": true,
+    "start": "Stop:"
+  },
+  {
+    "text": "> OK",
+    "refused": true,
+    "start": "OK"
+  },
+  {
+    "text": "*go*",
+    "refused": true,
+    "start": "go"
+  },
+  {
+    "text": "no",
+    "refused": true,
+    "start": "no"
+  },
+  {
+    "text": "No!",
+    "refused": true,
+    "start": "No"
+  },
+  {
+    "text": "ok.",
+    "refused": true,
+    "start": "ok"
+  },
+  {
+    "text": "Approve",
+    "refused": true,
+    "start": "Approve"
+  },
+  {
+    "text": "lgtm!",
+    "refused": true,
+    "start": "lgtm"
+  },
+  {
+    "text": "\"OK\"",
+    "refused": true,
+    "start": "OK"
+  },
+  {
+    "text": "_okay_",
+    "refused": true,
+    "start": "okay"
+  },
+  {
+    "text": "OK: fine by me",
+    "refused": true,
+    "start": "OK:"
+  },
+  {
+    "text": "Go: ship the fee holiday",
+    "refused": true,
+    "start": "Go:"
+  },
+  {
+    "text": "Led to: END-1",
+    "refused": true,
+    "start": "Led to:"
+  },
+  {
+    "text": "Answered: https://www.notion.so/x",
+    "refused": true,
+    "start": "Answered:"
+  },
+  {
+    "text": "going to check",
+    "refused": false,
+    "start": null
+  },
+  {
+    "text": "no change: links the page",
+    "refused": false,
+    "start": null
+  },
+  {
+    "text": "Is this OK? I think so.",
+    "refused": false,
+    "start": null
+  },
+  {
+    "text": "Please OK or send back.",
+    "refused": false,
+    "start": null
+  },
+  {
+    "text": "Due: book the venue",
+    "refused": false,
+    "start": null
+  },
+  {
+    "text": "View: a fee holiday costs a week of fees.",
+    "refused": false,
+    "start": null
+  },
+  {
+    "text": "Okay-ish rounding",
+    "refused": false,
+    "start": null
+  },
+  {
+    "text": "Nothing to do",
+    "refused": false,
+    "start": null
+  },
+  {
+    "text": "Go, later or no? <@U0000000>",
+    "refused": false,
+    "start": null
+  },
+  {
+    "text": "OPS-F1-10 · Draft for Fee model",
+    "refused": false,
+    "start": null
+  },
+  {
+    "text": "Nobody decided yet",
+    "refused": false,
+    "start": null
+  },
+  {
+    "text": "Stopgap: none",
+    "refused": false,
+    "start": null
+  },
+  {
+    "text": "The fee is rounded down.",
+    "refused": false,
+    "start": null
+  }
+]

@@ -1,0 +1,817 @@
+{
+  "source": "OPS · F0 to F9 flow pages as quoted in REF §2, as of 2026-09-25",
+  "variants": {
+    "F0.1": {
+      "name": "New work",
+      "flow": "F0",
+      "umbrella": false,
+      "sub_issues": false,
+      "steps": [
+        {
+          "id": "OPS-F0-01",
+          "who": "Entry agent",
+          "does": "Checks the request and any linked issue for an umbrella key",
+          "output": null,
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F0-02",
+          "who": "Entry agent",
+          "does": "Posts the ask in #lighthouse: who asked, what for, which agent, links",
+          "output": "Slack post",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F0-03",
+          "who": "Lighthouse",
+          "does": "Splits the ask (39); for each piece asks the flow questions (23); a question or an idea opens no umbrella and moves",
+          "output": "A flow and variant",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F0-04",
+          "who": "Lighthouse",
+          "does": "Writes the lightmap: flow and variant, each step quoted with its ID, the pages to read first, where each output lands, the closing gate",
+          "output": "Lightmap text",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F0-05",
+          "who": "Lighthouse",
+          "does": "Opens the umbrella: title \"<variant> · the ask\", link to the thread, label Lightmap; the lightmap in its Lightmap section",
+          "output": "Linear umbrella; its key is the stamp",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F0-06",
+          "who": "Lighthouse",
+          "does": "Replies in the thread with the lightmap and the umbrella key",
+          "output": "Slack reply",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F0-07",
+          "who": "Task manager",
+          "does": "Builds the tree: one sub-issue per step with an output, \"By:\" naming who does it, done-when naming its place. One-step work gets no children",
+          "output": "Linear sub-issues",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F0-08",
+          "who": "Entry agent and managers",
+          "does": "Work the steps in order: the entry agent the craft, the doc manager every Notion write, the task manager every Linear write",
+          "output": "The flow's outputs",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F0-09",
+          "who": "Task manager",
+          "does": "Closes the open sub-issues, then the umbrella, each with its closing comment",
+          "output": "Closed umbrella",
+          "sub_issue": false
+        }
+      ],
+      "includes": []
+    },
+    "F0.6": {
+      "name": "Carry-over",
+      "flow": "F0",
+      "umbrella": false,
+      "sub_issues": false,
+      "steps": [
+        {
+          "id": "OPS-F0-41",
+          "who": "Entry agent",
+          "does": "Lists every page that isn't Retired whose Written from includes the changed page (its Feeds), one line each: \"changes\" with the section and why, or \"no change\" with why; tags each page's Owner",
+          "output": "Carry-over list in the thread",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F0-42",
+          "who": "Lighthouse",
+          "does": "Opens one follow-up umbrella per \"changes\" page, without a new ask or a \"go\", in the flow the borderline table gives, the line quoted as its ask, the origin linked both ways",
+          "output": "Follow-up umbrellas; #lighthouse posts",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F0-43",
+          "who": "Doc manager, then task manager",
+          "does": "The doc manager adds \"Checked against <changed page> (<origin key>): no change, <why>\" to each \"no change\" page; the task manager links the list on the umbrella and closes the tree",
+          "output": "Change log lines; closed umbrella",
+          "sub_issue": false
+        }
+      ],
+      "includes": []
+    },
+    "F1.2": {
+      "name": "Change a page",
+      "flow": "F1",
+      "umbrella": true,
+      "sub_issues": true,
+      "steps": [
+        {
+          "id": "OPS-F1-09",
+          "who": "Entry agent",
+          "does": "Reads the page, then the task row, the pair's template and the listed domain Rules pages",
+          "output": null,
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F1-10",
+          "who": "Entry agent",
+          "does": "Drafts the change in the thread: section, current text, new text and why",
+          "output": "Change in the thread",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F1-11",
+          "who": "Doc manager",
+          "does": "Only when the page is Draft: applies it word for word; review goes to OPS-F1-05",
+          "output": "Updated Draft page",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F1-12",
+          "who": "Owner",
+          "does": "OKs the change in the thread, or sends it back naming what to fix",
+          "output": "Thread reply",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F1-13",
+          "who": "Doc manager",
+          "does": "Applies the change word for word, adds a change log line (date · what changed · why · umbrella key), sets As of to today",
+          "output": "Updated Current page",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F1-14",
+          "who": "Entry agent, Lighthouse, doc manager, task manager",
+          "does": "Runs F0.6 (OPS-F0-41 to 43), which closes the tree",
+          "output": "Carry-over list; follow-ups; closed umbrella",
+          "sub_issue": true
+        }
+      ],
+      "includes": [
+        "F0.6"
+      ]
+    },
+    "F2.1": {
+      "name": "Feature or fix",
+      "flow": "F2",
+      "umbrella": true,
+      "sub_issues": true,
+      "steps": [
+        {
+          "id": "OPS-F2-01",
+          "who": "Entry agent",
+          "does": "Opens a GitHub Discussion (category from the task row; in the demo, Proposals): the problem, the proposal, the umbrella key on its first line",
+          "output": "GitHub Discussion",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-02",
+          "who": "Discussion Action",
+          "does": "Files the Linear check issue under the umbrella on the first line",
+          "output": "Linear check issue",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F2-03",
+          "who": "Entry agent, Henry, 서준",
+          "does": "Discuss until the entry agent posts a proposed conclusion: fix or addition, and its scope",
+          "output": "Discussion replies",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-04",
+          "who": "Henry or 서준",
+          "does": "Posts \"go\" or \"no\" on the discussion",
+          "output": "Discussion reply",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-05",
+          "who": "Task manager",
+          "does": "Only after \"no\": closes the check issue and the tree as \"not doing\"",
+          "output": "Closed umbrella",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F2-06",
+          "who": "Entry agent",
+          "does": "Opens the GitHub Issue from the discussion, linking the discussion and the Linear sub-issue",
+          "output": "GitHub Issue",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-07",
+          "who": "Entry agent",
+          "does": "Writes the temporary spec or plan and the code on a branch named from the Linear sub-issue",
+          "output": "Branch",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-08",
+          "who": "Entry agent",
+          "does": "Opens a PR linking its GitHub Issue and discussion, posts the PR link in the thread",
+          "output": "PR",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-09",
+          "who": "Henry or 서준",
+          "does": "Reviews and approves, or requests changes (back to 07)",
+          "output": "PR review",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-10",
+          "who": "Entry agent",
+          "does": "Merges the PR; only with approval and green CI",
+          "output": "Merged PR",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-11",
+          "who": "Merge Action",
+          "does": "Files the docs issue under the umbrella",
+          "output": "Linear docs issue",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F2-12",
+          "who": "Entry agent",
+          "does": "Reads the Code doc sections the merged code touches; posts which change, or \"no doc change\" and why",
+          "output": "Thread post",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-13",
+          "who": "Entry agent, Owner, doc manager",
+          "does": "Runs OPS-F1-09 to 13 on the Code doc inside this tree",
+          "output": "Updated Code doc",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-14",
+          "who": "Entry agent, Lighthouse, doc manager, then task manager",
+          "does": "When 13 changed a Code doc, F0.6 runs first; the task manager closes the docs issue with the Code doc link or \"no doc change\"",
+          "output": "Carry-over list; closed docs issue",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F2-15",
+          "who": "Entry agent",
+          "does": "Opens the cleanup PR (label cleanup) removing the temporary spec and plan; it runs 08 to 10",
+          "output": "Merged cleanup PR",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-16",
+          "who": "Task manager",
+          "does": "Closes the tree",
+          "output": "Closed umbrella",
+          "sub_issue": false
+        }
+      ],
+      "includes": []
+    },
+    "F2.2": {
+      "name": "Finding with no code change",
+      "flow": "F2",
+      "umbrella": true,
+      "sub_issues": true,
+      "steps": [
+        {
+          "id": "OPS-F2-17",
+          "who": "Entry agent",
+          "does": "Opens a Discussion (Findings) stating the finding with a permalink pinned to a commit, key on its first line; 02 runs",
+          "output": "GitHub Discussion",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-18",
+          "who": "Henry or 서준",
+          "does": "Posts \"go\" (the finding holds) or \"no\"",
+          "output": "Discussion reply",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-19",
+          "who": "Task manager, then entry agent, Owner, doc manager",
+          "does": "Files the docs sub-issue; OPS-F1-09 to 13 run on the Code doc",
+          "output": "Updated Code doc",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-20",
+          "who": "Entry agent, then task manager",
+          "does": "Marks the discussion answered; F0.6 when the Code doc changed; closes the tree",
+          "output": "Closed umbrella",
+          "sub_issue": false
+        }
+      ],
+      "includes": []
+    },
+    "F2.3": {
+      "name": "Harness and infra",
+      "flow": "F2",
+      "umbrella": true,
+      "sub_issues": true,
+      "steps": [
+        {
+          "id": "OPS-F2-21",
+          "who": "Entry agent",
+          "does": "Checks that the rule the change puts in force is on a Current Rules page",
+          "output": null,
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F2-22",
+          "who": "Entry agent",
+          "does": "Runs 01 to 16 with the rule ID cited in the discussion and the PR, the PR touching only harness paths; in the demo the Discussion category is Harness",
+          "output": "As F2.1",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F2-23",
+          "who": "Entry agent, then task manager",
+          "does": "Instead of 12 and 13: posts an F9.4 ask in #lighthouse to update the rule's Held by; the task manager closes the docs issue with that link",
+          "output": "F9.4 ask; closed docs issue",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-01",
+          "who": "Entry agent",
+          "does": "Opens a GitHub Discussion (category from the task row; in the demo, Proposals): the problem, the proposal, the umbrella key on its first line",
+          "output": "GitHub Discussion",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-02",
+          "who": "Discussion Action",
+          "does": "Files the Linear check issue under the umbrella on the first line",
+          "output": "Linear check issue",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F2-03",
+          "who": "Entry agent, Henry, 서준",
+          "does": "Discuss until the entry agent posts a proposed conclusion: fix or addition, and its scope",
+          "output": "Discussion replies",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-04",
+          "who": "Henry or 서준",
+          "does": "Posts \"go\" or \"no\" on the discussion",
+          "output": "Discussion reply",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-05",
+          "who": "Task manager",
+          "does": "Only after \"no\": closes the check issue and the tree as \"not doing\"",
+          "output": "Closed umbrella",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F2-06",
+          "who": "Entry agent",
+          "does": "Opens the GitHub Issue from the discussion, linking the discussion and the Linear sub-issue",
+          "output": "GitHub Issue",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-07",
+          "who": "Entry agent",
+          "does": "Writes the temporary spec or plan and the code on a branch named from the Linear sub-issue",
+          "output": "Branch",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-08",
+          "who": "Entry agent",
+          "does": "Opens a PR linking its GitHub Issue and discussion, posts the PR link in the thread",
+          "output": "PR",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-09",
+          "who": "Henry or 서준",
+          "does": "Reviews and approves, or requests changes (back to 07)",
+          "output": "PR review",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-10",
+          "who": "Entry agent",
+          "does": "Merges the PR; only with approval and green CI",
+          "output": "Merged PR",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-11",
+          "who": "Merge Action",
+          "does": "Files the docs issue under the umbrella",
+          "output": "Linear docs issue",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F2-14",
+          "who": "Entry agent, Lighthouse, doc manager, then task manager",
+          "does": "When 13 changed a Code doc, F0.6 runs first; the task manager closes the docs issue with the Code doc link or \"no doc change\"",
+          "output": "Carry-over list; closed docs issue",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F2-15",
+          "who": "Entry agent",
+          "does": "Opens the cleanup PR (label cleanup) removing the temporary spec and plan; it runs 08 to 10",
+          "output": "Merged cleanup PR",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F2-16",
+          "who": "Task manager",
+          "does": "Closes the tree",
+          "output": "Closed umbrella",
+          "sub_issue": false
+        }
+      ],
+      "includes": []
+    },
+    "F4": {
+      "name": "Question",
+      "flow": "F4",
+      "umbrella": false,
+      "sub_issues": false,
+      "steps": [
+        {
+          "id": "OPS-F4-01",
+          "who": "Question/idea agent",
+          "does": "Next-step test; unsure: asks back; writing next: hands to Lighthouse; an idea: moves to #ideas",
+          "output": "Thread reply",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F4-02",
+          "who": "Question/idea agent",
+          "does": "Answers from Current docs with page links (code with pinned permalinks); or names the gap",
+          "output": "Thread reply",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F4-03",
+          "who": "The asker",
+          "does": "Asks the next question in the same thread; 02 runs again",
+          "output": "Thread post",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F4-04",
+          "who": "Lighthouse",
+          "does": "Proposes a flow for each gap or piece; posts it as an ask once Henry or 서준 say \"go\"",
+          "output": "Thread post; umbrellas",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F4-05",
+          "who": "Henry or 서준",
+          "does": "Posts one \"Answer:\" line",
+          "output": "Answer line",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F4-06",
+          "who": "Question/idea agent",
+          "does": "No answer by the next checker run, or \"keep open\": files the open-question issue (label Question, In Review)",
+          "output": "Open-question issue",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F4-07",
+          "who": "Question/idea agent",
+          "does": "Closes the thread: \"Answered:\", \"Led to:\" or \"Parked:\"",
+          "output": "Closing line",
+          "sub_issue": false
+        }
+      ],
+      "includes": []
+    },
+    "F5.1": {
+      "name": "Recorded call",
+      "flow": "F5",
+      "umbrella": true,
+      "sub_issues": true,
+      "steps": [
+        {
+          "id": "OPS-F5-01",
+          "who": "Doc manager",
+          "does": "Creates the Call log row: Call (the topic), Date, Who, Granola note, Slack thread, Lightmap",
+          "output": "Call log row",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F5-02",
+          "who": "Entry agent",
+          "does": "Reads the Granola note and posts the item list: one line per item with its kind, one sentence, who said or decided it, and the line of the note it came from",
+          "output": "Item list in the thread",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F5-03",
+          "who": "Henry or 서준, whoever was on the call",
+          "does": "Checks the list, fixes, drops or adds items, then posts \"OK\"",
+          "output": "\"OK\" in the thread",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F5-04",
+          "who": "Lighthouse",
+          "does": "Posts each item as its own ask, with the row as its source and the person the list names as asker; an open question to the question channel; an idea to #ideas",
+          "output": "Asks; umbrellas; question and idea threads",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F5-05",
+          "who": "Doc manager, then task manager",
+          "does": "The doc manager adds each item's key or thread to the row; the task manager closes the F5 tree",
+          "output": "Updated row; closed umbrella",
+          "sub_issue": false
+        }
+      ],
+      "includes": []
+    },
+    "F6": {
+      "name": "Idea",
+      "flow": "F6",
+      "umbrella": false,
+      "sub_issues": false,
+      "steps": [
+        {
+          "id": "OPS-F6-01",
+          "who": "Question/idea agent",
+          "does": "Idea test: a question about what is moves to the question channel; work already decided goes to Lighthouse; unsure: asks back",
+          "output": "Thread reply",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F6-02",
+          "who": "Question/idea agent",
+          "does": "Adds context from Current docs, each point linked: what exists like it, earlier threads, which pages it would touch. No view on whether to do it",
+          "output": "Thread reply",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F6-03",
+          "who": "Henry, 서준, agents when asked",
+          "does": "Talk it over; an agent asked for its view gives it, marked as a view",
+          "output": "Thread posts",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F6-04",
+          "who": "Henry or 서준",
+          "does": "One decision line: \"Go:\", \"Later:\" with why and the date or event, or \"No:\" with why",
+          "output": "Decision line",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F6-05",
+          "who": "Lighthouse",
+          "does": "\"Go:\": each piece as its own ask. \"Later:\": an F7.3 revisit, \"Revisit: <idea>\", with the date and the thread link",
+          "output": "Asks; an F7 task",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F6-06",
+          "who": "Checker",
+          "does": "Two weeks with no decision line: \"Go, later or no?\"",
+          "output": "Thread reply",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F6-07",
+          "who": "Question/idea agent",
+          "does": "Closes the thread: \"Led to:\", \"Later:\" with the F7 task key and date, or \"Dropped:\" with why",
+          "output": "Closing line",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F6-08",
+          "who": "Question/idea agent",
+          "does": "The revisit comes due: reopens the thread with what changed in the docs since the \"Later:\" line; 03 to 07 run again",
+          "output": "Thread reply",
+          "sub_issue": false
+        }
+      ],
+      "includes": []
+    },
+    "F7.1": {
+      "name": "To-do",
+      "flow": "F7",
+      "umbrella": true,
+      "sub_issues": false,
+      "steps": [
+        {
+          "id": "OPS-F7-01",
+          "who": "Lighthouse",
+          "does": "One thread per task; finds the when (a due date, an event, a repeat; a to-do for now is due today; F7.3's when is in the \"Later:\" line). No when: asks \"By when, or after what?\" and opens nothing",
+          "output": "Thread reply when asked back",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-02",
+          "who": "Task manager",
+          "does": "Makes the umbrella the task: label Later, owner (the asker unless named), the when (Due date; a blocked-by link; or a check date with \"Waits on:\")",
+          "output": "The task in Linear",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-03",
+          "who": "Checker",
+          "does": "Lists open Later tasks that are due and hands each on: F7.1 to 05, F7.2 to 08, F7.3 to 10",
+          "output": "Hand-off in the task's thread",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-05",
+          "who": "Checker",
+          "does": "Tells the owner \"Due: <task>\" in the task's thread, and asks again at every run. Never closes it",
+          "output": "Thread reply",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-06",
+          "who": "Owner",
+          "does": "Posts \"Done:\" with what was done and its link, naming any page that should now say something",
+          "output": "Done line",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-07",
+          "who": "Task manager, Lighthouse",
+          "does": "Closes the task with the Done line; each page it names gets its own ask",
+          "output": "Closed task",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-12",
+          "who": "Owner, then task manager",
+          "does": "\"Move:\" with the new when and why; the task manager sets it",
+          "output": "Moved when",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-13",
+          "who": "Henry or 서준, then task manager",
+          "does": "\"Drop:\" with why; closed as not doing. A revisit closes with the \"No:\" line from its #ideas thread",
+          "output": "Closed task",
+          "sub_issue": false
+        }
+      ],
+      "includes": []
+    },
+    "F7.2": {
+      "name": "Later work",
+      "flow": "F7",
+      "umbrella": true,
+      "sub_issues": false,
+      "steps": [
+        {
+          "id": "OPS-F7-01",
+          "who": "Lighthouse",
+          "does": "One thread per task; finds the when (a due date, an event, a repeat; a to-do for now is due today; F7.3's when is in the \"Later:\" line). No when: asks \"By when, or after what?\" and opens nothing",
+          "output": "Thread reply when asked back",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-02",
+          "who": "Task manager",
+          "does": "Makes the umbrella the task: label Later, owner (the asker unless named), the when (Due date; a blocked-by link; or a check date with \"Waits on:\")",
+          "output": "The task in Linear",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-03",
+          "who": "Checker",
+          "does": "Lists open Later tasks that are due and hands each on: F7.1 to 05, F7.2 to 08, F7.3 to 10",
+          "output": "Hand-off in the task's thread",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-08",
+          "who": "Lighthouse",
+          "does": "F7.2: re-stamps the task into its flow as if asked today, opens the work's umbrella without a new ask or a \"go\", both linked",
+          "output": "New umbrella",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-09",
+          "who": "Task manager",
+          "does": "Closes the F7.2 task with \"Led to: <umbrella key>\"",
+          "output": "Closed task",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-12",
+          "who": "Owner, then task manager",
+          "does": "\"Move:\" with the new when and why; the task manager sets it",
+          "output": "Moved when",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-13",
+          "who": "Henry or 서준, then task manager",
+          "does": "\"Drop:\" with why; closed as not doing. A revisit closes with the \"No:\" line from its #ideas thread",
+          "output": "Closed task",
+          "sub_issue": false
+        }
+      ],
+      "includes": []
+    },
+    "F7.3": {
+      "name": "Revisit",
+      "flow": "F7",
+      "umbrella": true,
+      "sub_issues": false,
+      "steps": [
+        {
+          "id": "OPS-F7-01",
+          "who": "Lighthouse",
+          "does": "One thread per task; finds the when (a due date, an event, a repeat; a to-do for now is due today; F7.3's when is in the \"Later:\" line). No when: asks \"By when, or after what?\" and opens nothing",
+          "output": "Thread reply when asked back",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-02",
+          "who": "Task manager",
+          "does": "Makes the umbrella the task: label Later, owner (the asker unless named), the when (Due date; a blocked-by link; or a check date with \"Waits on:\")",
+          "output": "The task in Linear",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-03",
+          "who": "Checker",
+          "does": "Lists open Later tasks that are due and hands each on: F7.1 to 05, F7.2 to 08, F7.3 to 10",
+          "output": "Hand-off in the task's thread",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-10",
+          "who": "Question/idea agent",
+          "does": "F7.3: reopens the idea's thread at OPS-F6-08, linking the task",
+          "output": "Reopened thread",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-11",
+          "who": "Task manager",
+          "does": "Closes the revisit with \"Reopened: <thread link>\"",
+          "output": "Closed task",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-12",
+          "who": "Owner, then task manager",
+          "does": "\"Move:\" with the new when and why; the task manager sets it",
+          "output": "Moved when",
+          "sub_issue": false
+        },
+        {
+          "id": "OPS-F7-13",
+          "who": "Henry or 서준, then task manager",
+          "does": "\"Drop:\" with why; closed as not doing. A revisit closes with the \"No:\" line from its #ideas thread",
+          "output": "Closed task",
+          "sub_issue": false
+        }
+      ],
+      "includes": []
+    },
+    "F9.4": {
+      "name": "Holder update",
+      "flow": "F9",
+      "umbrella": true,
+      "sub_issues": true,
+      "steps": [
+        {
+          "id": "OPS-F9-17",
+          "who": "Entry agent",
+          "does": "Drafts the new Held by and Written only for each rule the holder serves, linking the merged PR",
+          "output": "Draft in the thread",
+          "sub_issue": true
+        },
+        {
+          "id": "OPS-F9-18",
+          "who": "Doc manager, then task manager",
+          "does": "Applies it word for word with a change log line linking the PR; no approval step, no carry-over (OPS-F9-26); closes the tree",
+          "output": "Updated Rules page; closed umbrella",
+          "sub_issue": true
+        }
+      ],
+      "includes": []
+    }
+  }
+}

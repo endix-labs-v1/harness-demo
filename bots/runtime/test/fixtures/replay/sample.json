@@ -1,0 +1,38 @@
+{
+  "bot": "lighthouse",
+  "packet": {
+    "bot": "lighthouse",
+    "now": "2026-10-02T14:03:00+09:00",
+    "event": {
+      "id": "E1",
+      "channel": "demo-lighthouse",
+      "ts": "1790000000.000100",
+      "thread_ts": null,
+      "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000000000100",
+      "author": { "name": "Henry", "kind": "person" },
+      "text": "Update the Fee model page: the fee is rounded down."
+    },
+    "thread": [],
+    "umbrellas": [],
+    "people": { "Henry": { "slack": "U_HENRY" } }
+  },
+  "reads": {
+    "read_thread": {
+      "https://endix.slack.com/archives/C0C61PKP10Q/p1790000000000100": {
+        "messages": [
+          {
+            "ts": "1790000000.000100",
+            "author": { "name": "Henry", "kind": "person" },
+            "text": "Update the Fee model page: the fee is rounded down.",
+            "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000000000100"
+          }
+        ]
+      }
+    }
+  },
+  "expected": [
+    { "tool": "read_thread", "status": "allowed", "input": { "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000000000100" } },
+    { "tool": "steps", "status": "allowed", "input": { "variant": "F1.2" } },
+    { "tool": "Bash", "status": "refused" }
+  ]
+}

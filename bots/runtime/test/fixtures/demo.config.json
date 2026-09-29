@@ -1,0 +1,35 @@
+{
+  "timezone": "Asia/Seoul",
+  "people": {
+    "henry": {"name": "Henry", "slack_user_id": "U_HENRY", "linear_user_id": "8e4b99fb-176b-4f61-bcf0-cf56a34abef6",
+              "notion_user_id": "107d872b-594c-81a7-84f5-0002f77c091c", "github": ""},
+    "seojun_demo": {"name": "Seojun (demo)", "github": ""}
+  },
+  "slack": {
+    "channels": {"lighthouse": "C0C61PKP10Q", "questions": "C0C61PKLZT2", "ideas": "C0C55EFGY5C", "build_test": "C_BUILD_TEST", "no_bots": "C_NO_BOTS"},
+    "bots": {"lighthouse": {"user_id": "U_LH"}, "task_manager": {"user_id": "U_TM"}, "doc_manager": {"user_id": "U_DM"},
+             "question_idea": {"user_id": "U_QI"}, "checker": {"user_id": "U_CK"}, "entry_agent": {"user_id": "U_EA"},
+             "actions": {"bot_id": "B_ACTIONS"}}
+  },
+  "linear": {
+    "team_id": "0566cf1e-0d8f-4221-8b52-069d0c0e696e",
+    "project_id": "cee0ce78-826e-4b88-9e81-631252326b6e",
+    "labels": {"Lightmap": "LBL_LIGHTMAP", "Later": "LBL_LATER", "Question": "LBL_QUESTION"},
+    "states": {"Backlog": "f3ac902d-8c21-46f3-85a4-9cefc99beb58", "Todo": "a2212eda-affd-489f-9ef7-10e9a0cbc32e",
+               "In Progress": "be118233-73ce-43fc-9461-f737ad23810d", "In Review": "985769b5-3bf2-48a2-8fa9-f29d65f5d825",
+               "Done": "cc494fe3-b61c-41c4-95e3-e413fc8163dd", "Canceled": "ba3b12fb-ebc8-4e85-ae71-668871ff677c"},
+    "build_umbrella": "",
+    "views": {"umbrellas": "", "later": ""}
+  },
+  "notion": {
+    "demo_page_id": "3ea8f1ec11b48156b441edd13618d7a6",
+    "docs_data_source": "c0185c0a-cbc6-49b4-a0da-62ad45fbb27f",
+    "call_log_data_source": "DS_CALL_LOG",
+    "pages": {"fee_model": "3ea8f1ec11b4816d8adae5fa98d19815", "code_doc_feemodel": "3ea8f1ec11b481c78725c73eca244ed3",
+              "faq_fees": "3ea8f1ec11b48149babfd4814aec71fd", "launch_plan": "", "code_rules_natspec": ""}
+  },
+  "github": {"repo": "endix-labs-v1/harness-demo", "discussion_categories": {"Proposals": "", "Findings": "", "Harness": ""}},
+  "granola": {"folder": "Endix demo"},
+  "model": {"bots": "sonnet", "entry_agent": "opus", "eval_runner": ["opus", "sonnet"], "eval_judge": "cross"},
+  "checker": {"schedule": "0 9 * * *", "quiet_idea_days": 14}
+}
