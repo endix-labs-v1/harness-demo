@@ -1,5 +1,5 @@
 # The walls. Each job refuses one thing, whatever an agent was told.
-# Branch protection on main requires all four to pass, plus a person's approval.
+# Branch protection on main requires all five to pass, plus a person's approval.
 name: walls
 
 on:
@@ -33,11 +33,47 @@ jobs:
           fetch-depth: 0
       - run: python3 scripts/check_rule_id.py ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}
 
+  eval-result:
+    name: "wall: eval result"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # W-33 (OPS-A4-48). Until the eval check is in the tree, a PR that touches no
+      # skill passes and a skill change fails, so this check always reports.
+      - env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [ -f scripts/check_eval_result.py ]; then
+            python3 scripts/check_eval_result.py "$BASE_SHA" "$HEAD_SHA"
+          elif [ -f scripts/check_eval.py ]; then
+            python3 scripts/check_eval.py "$BASE_SHA" "$HEAD_SHA"
+          else
+            changed=$(git diff --name-only "$BASE_SHA...$HEAD_SHA")
+            skills=$(printf '%s\n' "$changed" | sed -n 's#^\.claude/skills/\([^/]*\)/.*#\1#p' | sort -u)
+            if [ -z "$skills" ]; then
+              echo "No skill change, or each changed skill has its passing eval."
+              exit 0
+            fi
+            for name in $skills; do
+              msg="Skill change with no passing eval for $name. Run scripts/run_eval.py $name, commit evals/$name/runs/<run>.json, and add \"Eval: <that path>\" to the PR description (OPS-A4-48)."
+              echo "$msg"
+              echo "::error title=Wall: eval result::$msg"
+              echo "Reason: scripts/check_eval_result.py is not in this tree yet"
+            done
+            exit 1
+          fi
+
   tests:
     name: "tests: forge and the walls"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: foundry-rs/foundry-toolchain@v1
-      - run: forge test -vv
-      - run: pip install pytest && python3 -m pytest -q scripts/tests .claude/hooks/tests
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci --prefix bots/runtime && npm ci --prefix tools/entry-slack-mcp
+      - run: pip install pytest && make check STRICT=1

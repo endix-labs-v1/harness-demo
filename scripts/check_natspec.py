@@ -41,7 +41,7 @@ def check_file(path: pathlib.Path) -> list[str]:
         if not re.search(r"\b(public|external)\b", tail):
             continue
         doc = doc_above(src, m.start())
-        line = src[:m.start()].count("\n") + 1
+        line = src[:m.start(1)].count("\n") + 1  # the line of the name, not a blank line above
         missing = []
         if "@notice" not in doc:
             missing.append("@notice")
@@ -59,6 +59,7 @@ def main(argv: list[str]) -> int:
     files = [pathlib.Path(a) for a in argv] or sorted(pathlib.Path("src").rglob("*.sol"))
     problems = [p for f in files for p in check_file(f)]
     for p in problems:
+        print(p)  # the plain W-31 line
         path, line, rest = p.split(":", 2)
         print(f"::error file={path},line={line},title=Wall: NatSpec::{rest.strip()} (OPS-A4-41)")
     if not problems:

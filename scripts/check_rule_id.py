@@ -2,16 +2,16 @@
 """CI wall · harness changes cite their rule (OPS-F2-28, OPS-A4-40).
 
 A PR that touches a harness path (AGENTS.md, CLAUDE.md, .claude/, .github/,
-scripts/) fails unless its description cites the rule ID it puts in force,
-like OPS-F0-36. A PR that touches a skill must also link its eval ("Eval: <link>").
+scripts/, bots/, tools/, evals/) fails unless its description cites the rule ID
+it puts in force, like OPS-F0-36. A skill change's eval is checked by
+scripts/check_eval_result.py (W-33).
 Usage: check_rule_id.py <base-sha> <head-sha>
 """
 from __future__ import annotations
 import json, os, re, subprocess, sys
 
-HARNESS = ("AGENTS.md", "CLAUDE.md", ".claude/", ".github/", "scripts/")
+HARNESS = ("AGENTS.md", "CLAUDE.md", ".claude/", ".github/", "scripts/", "bots/", "tools/", "evals/")
 RULE = re.compile(r"\b(OPS|CODE|PROD|BD|GTM|RES|CO)-[A-Z0-9]+-\d+\b")
-EVAL = re.compile(r"(?im)^\s*eval:\s*\S+")
 
 
 def check(changed: list[str], body: str) -> list[str]:
@@ -22,8 +22,6 @@ def check(changed: list[str], body: str) -> list[str]:
     if not RULE.search(body or ""):
         problems.append(f"Harness change with no rule ID ({', '.join(harness[:5])}). Cite the rule "
                         "this change puts in force, like OPS-F0-36; with no rule, F9 runs first (OPS-F2-28).")
-    if any(f.startswith(".claude/skills/") for f in harness) and not EVAL.search(body or ""):
-        problems.append("Skill change with no eval. Add a line 'Eval: <link to the run>' (OPS-A4-48).")
     return problems
 
 
