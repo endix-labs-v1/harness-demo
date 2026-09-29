@@ -1,0 +1,43 @@
+# The walls. Each job refuses one thing, whatever an agent was told.
+# Branch protection on main requires all four to pass, plus a person's approval.
+name: walls
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  contents: read
+
+jobs:
+  umbrella-key:
+    name: "wall: umbrella key"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/check_umbrella_key.py
+
+  natspec:
+    name: "wall: NatSpec"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/check_natspec.py
+
+  rule-id:
+    name: "wall: harness rule ID"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: python3 scripts/check_rule_id.py ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}
+
+  tests:
+    name: "tests: forge and the walls"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: foundry-rs/foundry-toolchain@v1
+      - run: forge test -vv
+      - run: pip install pytest && python3 -m pytest -q scripts/tests .claude/hooks/tests
