@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "endix-entry-slack": {
+      "command": "node",
+      "args": ["tools/entry-slack-mcp/dist/index.js"],
+      "env": {"ENDIX_SECRETS": "${HOME}/.config/endix-demo/secrets.env",
+              "DEMO_CONFIG": "${HOME}/github/endix-demo-kit/config/demo.config.json"}
+    }
+  }
+}

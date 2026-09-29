@@ -1,0 +1,26 @@
+{
+  "name": "endix-entry-slack",
+  "version": "1.0.0",
+  "private": true,
+  "description": "endix-entry-slack: the entry agent's only way to post in Slack, as the Entry agent, in #demo-lighthouse (SYS §5.7).",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --format=cjs --target=node20 --outfile=dist/index.js",
+    "test": "vitest run",
+    "check": "tsc --noEmit && npm run build && vitest run"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.31.0",
+    "@slack/web-api": "8.1.1",
+    "dotenv": "18.0.4",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.43",
+    "esbuild": "0.28.2",
+    "typescript": "5.9.3",
+    "vitest": "4.1.11"
+  }
+}

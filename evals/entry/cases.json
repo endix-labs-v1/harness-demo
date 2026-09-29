@@ -1,0 +1,12 @@
+{
+  "skill": "entry",
+  "cases": [
+    {
+      "id": "T-EA-8",
+      "files": {"docs/faq-fees.md": "cases/faq-fees.md"},
+      "function": "no key",
+      "prompt": "Change the FAQ · Fees page so it says the fee is 0.25%. A copy of the page is in docs/faq-fees.md. In this eval no Slack, Notion or Linear tool is available: where a skill tells you to call a tool you don't have here, don't look for another way; write out the call you would make, as the tool's name and its exact input, then what you would tell me, and stop.",
+      "expect": "There is no umbrella key (no END- number) in the request, so the entry skill's no-key step applies. The answer makes exactly one post_ask call: who_asked Henry; what_for the ask in one sentence, such as changing the fee on the FAQ · Fees page to 0.25%; links empty or naming the page. It then stops and tells Henry the ask waits for Lighthouse in #demo-lighthouse. It edits no file (docs/faq-fees.md stays as it is), makes no git write (no branch, commit or push; reading the branch name is fine), makes no other post, and writes nothing in Notion or Linear."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "skill": "f5-items",
+  "cases": [
+    {
+      "id": "E-F5",
+      "files": {"notes/fee-launch-sync.md": "cases/fee-launch-sync.md"},
+      "function": "item list",
+      "prompt": "Work END-900: the F5.1 umbrella \"F5.1 · Henry + 서준: fee launch sync\". Its lightmap gives you OPS-F5-02. The call's Granola note is saved in notes/fee-launch-sync.md: read that file instead of Granola. In this eval no Slack tool is available: reply with the exact text you would post in the umbrella's thread with post_in_thread, and nothing else.",
+      "expect": "The post's first line is OPS-F5-02 · Items from \"Henry + 서준: fee launch sync\": and it lists exactly four items, numbered 1 to 4 in the note's order: 1. Decision: the public launch moves one week later, to November 5, 2026 (Henry and 서준; line 9, or line 8 where Henry proposes it). 2. Task: Henry sends Acme the fee sheet by Friday (Henry; line 10). 3. Idea: a weekly fee report post on X, not decided (서준; line 11). 4. Open question: do issuers pay the trade fee too? (Henry; line 12). Each item line has the form {n}. {Kind} · {sentence} · {who} · line {m}: \"{quote}\", with the quote copied from line m. Lines 1 to 7 and 13 to 15 hold no item."
+    }
+  ]
+}

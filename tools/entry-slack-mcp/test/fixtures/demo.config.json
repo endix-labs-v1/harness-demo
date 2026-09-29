@@ -1,0 +1,20 @@
+{
+  "timezone": "Asia/Seoul",
+  "people": {
+    "henry": {"name": "Henry", "slack_user_id": "U_HENRY", "linear_user_id": "8e4b99fb-176b-4f61-bcf0-cf56a34abef6",
+              "notion_user_id": "107d872b-594c-81a7-84f5-0002f77c091c", "github": ""},
+    "seojun_demo": {"name": "Seojun (demo)", "github": ""}
+  },
+  "slack": {
+    "channels": {"lighthouse": "C0C61PKP10Q", "questions": "C0C61PKLZT2", "ideas": "C0C55EFGY5C", "build_test": "", "no_bots": ""},
+    "bots": {"lighthouse": {"user_id": "U_LH"}, "task_manager": {"user_id": "U_TM"}, "doc_manager": {"user_id": "U_DM"},
+             "question_idea": {"user_id": "U_QI"}, "checker": {"user_id": "U_CK"}, "entry_agent": {"user_id": "U_EA"},
+             "actions": {"bot_id": "B_ACTIONS"}}
+  },
+  "linear": {
+    "team_id": "0566cf1e-0d8f-4221-8b52-069d0c0e696e",
+    "project_id": "cee0ce78-826e-4b88-9e81-631252326b6e"
+  },
+  "github": {"repo": "endix-labs-v1/harness-demo"},
+  "model": {"bots": "sonnet", "entry_agent": "opus", "eval_runner": ["opus", "sonnet"], "eval_judge": "cross"}
+}

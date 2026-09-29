@@ -1,0 +1,19 @@
+{
+  "skill": "hand-off",
+  "cases": [
+    {
+      "id": "E-HO-1",
+      "files": {"thread/END-901.md": "cases/thread-notion.md"},
+      "function": "Notion write",
+      "prompt": "Henry OK'd the draft in the thread of END-901. Get the change applied to the FAQ · Fees page now (step OPS-F1-13), and do nothing else. The thread is saved in thread/END-901.md: read that file instead of Slack. In this eval no Slack, Notion or Linear tool is available: where a skill tells you to call a tool you don't have here, don't look for another way; write out the call you would make, as the tool's name and its exact input, then what you would tell me, and stop.",
+      "expect": "FAQ · Fees is a Notion page, so the entry agent doesn't write it and the hand-off skill applies. The answer makes exactly one hand_off call: permalink https://endix-demo.slack.com/archives/C0C61PKP10Q/p1759370000000100 (the thread's), manager doc, step_id OPS-F1-13, what: apply the draft above to FAQ · Fees word for word (0.30% becomes 0.25% under How much is the fee?), where: FAQ · Fees with its link https://www.notion.so/3ea8f1ec11b48149babfd4814aec71fd. The post it makes reads <@Doc manager> OPS-F1-13 · {what} · {where}. It then says it waits for the doc manager's reply with the link. It makes no Notion or Linear call, edits no file and posts nothing else."
+    },
+    {
+      "id": "E-HO-2",
+      "files": {"thread/END-905.md": "cases/thread-linear.md"},
+      "function": "Linear write",
+      "prompt": "Set END-908, the sub-issue for step OPS-F2-07 of END-905, to In Progress in Linear, and do nothing else. The thread is saved in thread/END-905.md: read that file instead of Slack. In this eval no Slack, Notion or Linear tool is available: where a skill tells you to call a tool you don't have here, don't look for another way; write out the call you would make, as the tool's name and its exact input, then what you would tell me, and stop.",
+      "expect": "A status in Linear is the task manager's write, so the hand-off skill applies. The answer makes exactly one hand_off call: permalink https://endix-demo.slack.com/archives/C0C61PKP10Q/p1759370000000200 (the thread's), manager task, step_id OPS-F2-07, what: set END-908 to In Progress, where: END-908 with its link https://linear.app/endix/issue/END-908. The post it makes reads <@Task manager> OPS-F2-07 · {what} · {where}. It then says it waits for the task manager's reply. It makes no Linear or Notion call, edits no file, creates no branch and posts nothing else."
+    }
+  ]
+}
