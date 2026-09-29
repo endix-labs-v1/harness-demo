@@ -1,0 +1,29 @@
+# Discussion Action (OPS-F2-02): files the Linear check issue under the umbrella on the discussion's first line.
+name: discussion
+
+on:
+  discussion:
+    types: [created]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: discussion-${{ github.event.discussion.html_url }}
+  cancel-in-progress: false
+
+jobs:
+  check-issue:
+    name: "Discussion Action: check issue"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/actions/discussion_check.py
+        env:
+          LINEAR_ACTIONS_CLIENT_ID: ${{ secrets.LINEAR_ACTIONS_CLIENT_ID }}
+          LINEAR_ACTIONS_CLIENT_SECRET: ${{ secrets.LINEAR_ACTIONS_CLIENT_SECRET }}
+          LINEAR_ACTIONS_TOKEN: ${{ secrets.LINEAR_ACTIONS_TOKEN }}
+          SLACK_ACTIONS_WEBHOOK_URL: ${{ secrets.SLACK_ACTIONS_WEBHOOK_URL }}
+          LINEAR_TEAM_ID: ${{ vars.LINEAR_TEAM_ID }}
+          LINEAR_PROJECT_ID: ${{ vars.LINEAR_PROJECT_ID }}

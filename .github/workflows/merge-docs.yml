@@ -1,0 +1,29 @@
+# merge Action (OPS-F2-11): files the Linear docs issue under the umbrella of the merged branch's step.
+name: merge-docs
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: merge-docs-${{ github.event.pull_request.html_url }}
+  cancel-in-progress: false
+
+jobs:
+  docs-issue:
+    name: "merge Action: docs issue"
+    if: github.event.pull_request.merged == true && !contains(github.event.pull_request.labels.*.name, 'cleanup')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/actions/merge_docs.py
+        env:
+          LINEAR_ACTIONS_CLIENT_ID: ${{ secrets.LINEAR_ACTIONS_CLIENT_ID }}
+          LINEAR_ACTIONS_CLIENT_SECRET: ${{ secrets.LINEAR_ACTIONS_CLIENT_SECRET }}
+          LINEAR_ACTIONS_TOKEN: ${{ secrets.LINEAR_ACTIONS_TOKEN }}
+          LINEAR_TEAM_ID: ${{ vars.LINEAR_TEAM_ID }}
+          LINEAR_PROJECT_ID: ${{ vars.LINEAR_PROJECT_ID }}
