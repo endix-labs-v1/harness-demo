@@ -43,7 +43,7 @@ describe("deny by default (W-10)", () => {
     expect(o.model).toBe("sonnet");
     expect(o.maxTurns).toBe(12);
     expect(o.permissionMode).toBe("default");
-    expect(o.allowedTools).toEqual(["read_thread", "linear_get", "linear_find", "notion_search", "notion_read", "steps"].map((n) => `mcp__endix__${n}`));
+    expect(o.allowedTools).toEqual(["read_thread", "linear_get", "linear_find", "notion_search", "notion_read", "steps", "post_reply", "move_to", "start_task_thread", "open_umbrella", "mention", "post_ask", "start_followup_thread", "post_items_as_asks"].map((n) => `mcp__endix__${n}`));
     expect(o.systemPrompt).toContain("# Shared rules (every bot)");
   });
 

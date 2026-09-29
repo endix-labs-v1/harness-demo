@@ -1,0 +1,23 @@
+{
+  "channel": "C0C55EFGY5C",
+  "root_ts": "1790000500.000100",
+  "messages": [
+    {
+      "ts": "1790000500.000100",
+      "user": "U_LH",
+      "text": "Moved from https://endix.slack.com/archives/C0C61PKP10Q/p1790000000000100 · asked by Henry\n> maybe a fee holiday in launch week?"
+    },
+    {
+      "ts": "1790000501.000100",
+      "user": "U_QI",
+      "thread_ts": "1790000500.000100",
+      "text": "Idea context: the fee (Fee model), launch (Launch plan). Earlier threads: none."
+    },
+    {
+      "ts": "1790000503.000100",
+      "user": "U_QI",
+      "thread_ts": "1790000500.000100",
+      "text": "Later: x"
+    }
+  ]
+}

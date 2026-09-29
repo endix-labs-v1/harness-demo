@@ -1,0 +1,23 @@
+{
+  "channel": "C0C61PKP10Q",
+  "root_ts": "1790000600.000100",
+  "messages": [
+    {
+      "ts": "1790000600.000100",
+      "user": "U_HENRY",
+      "text": "Here's the Granola note \"Henry + 서준: fee launch sync\" from our call on October 1, 2026 (Henry, 서준): https://notes.granola.ai/d/s4-demo"
+    },
+    {
+      "ts": "1790000610.000100",
+      "user": "U_EA",
+      "thread_ts": "1790000600.000100",
+      "text": "OPS-F5-02 · Items from \"Henry + 서준: fee launch sync\":\n1. Decision · launch moves to the new date · Henry and 서준 · line 12: \"let's move launch\"\n2. Task · Henry sends Acme the fee sheet by Friday · Henry · line 18: \"I'll send Acme the fee sheet\"\n3. Idea · a weekly fee report on X · 서준 or Henry · line 25: \"we could post a weekly fee report\"\n4. Open question · do issuers pay the trade fee too? · Henry · line 31: \"do issuers pay the trade fee?\""
+    },
+    {
+      "ts": "1790000611.000100",
+      "user": "U_EA",
+      "thread_ts": "1790000600.000100",
+      "text": "OK"
+    }
+  ]
+}

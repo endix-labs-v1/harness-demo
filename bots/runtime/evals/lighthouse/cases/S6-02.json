@@ -1,0 +1,68 @@
+{
+  "bot": "lighthouse",
+  "id": "S6-02",
+  "set": "demo",
+  "packet": {
+    "bot": "lighthouse",
+    "now": "2026-10-02T10:00:00+09:00",
+    "event": {
+      "id": "E1",
+      "channel": "demo-lighthouse",
+      "ts": "1790000600.000100",
+      "thread_ts": null,
+      "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000600000100",
+      "author": {
+        "name": "Henry",
+        "kind": "person"
+      },
+      "text": "Turn what we learned writing FeeModel's NatSpec into a skill, so the next agent writes it right the first time."
+    },
+    "thread": [
+      {
+        "ts": "1790000600.000100",
+        "author": {
+          "name": "Henry",
+          "kind": "person"
+        },
+        "text": "Turn what we learned writing FeeModel's NatSpec into a skill, so the next agent writes it right the first time.",
+        "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000600000100"
+      }
+    ],
+    "umbrellas": [],
+    "people": {
+      "Henry": {
+        "slack": "U_HENRY"
+      }
+    }
+  },
+  "reads": {
+    "read_thread": {
+      "https://endix.slack.com/archives/C0C61PKP10Q/p1790000600000100": {
+        "messages": [
+          {
+            "ts": "1790000600.000100",
+            "author": {
+              "name": "Henry",
+              "kind": "person"
+            },
+            "text": "Turn what we learned writing FeeModel's NatSpec into a skill, so the next agent writes it right the first time.",
+            "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000600000100"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "open": {
+      "variant": "F2.3",
+      "rule_id": "CODE-NAT-02",
+      "steps_include": [
+        "OPS-F2-21"
+      ],
+      "steps_exclude": [
+        "OPS-F2-12",
+        "OPS-F2-13"
+      ]
+    }
+  }
+}

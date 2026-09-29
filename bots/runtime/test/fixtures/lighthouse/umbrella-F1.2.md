@@ -1,0 +1,18 @@
+Thread: https://endix.slack.com/archives/C0C61PKP10Q/p1790000000000100
+Source: Henry · 2026-10-02
+
+## Lightmap
+
+Flow: F1.2 · Change a page · Task row: none in the demo (the flow's defaults)
+Steps:
+- OPS-F1-09 · Entry agent · Reads the page, then the task row, the pair's template and the listed domain Rules pages
+- OPS-F1-10 · Entry agent · Drafts the change in the thread: section, current text, new text and why
+- OPS-F1-12 · Owner · OKs the change in the thread, or sends it back naming what to fix
+- OPS-F1-13 · Doc manager · Applies the change word for word, adds a change log line (date · what changed · why · umbrella key), sets As of to today
+- OPS-F1-14 · Entry agent, Lighthouse, doc manager, task manager · Runs F0.6 (OPS-F0-41 to 43), which closes the tree
+- OPS-F0-41 · Entry agent · Lists every page that isn't Retired whose Written from includes the changed page (its Feeds), one line each: "changes" with the section and why, or "no change" with why; tags each page's Owner
+- OPS-F0-42 · Lighthouse · Opens one follow-up umbrella per "changes" page, without a new ask or a "go", in the flow the borderline table gives, the line quoted as its ask, the origin linked both ways
+- OPS-F0-43 · Doc manager, then task manager · The doc manager adds "Checked against <changed page> (<origin key>): no change, <why>" to each "no change" page; the task manager links the list on the umbrella and closes the tree
+Read first: Fee model (https://www.notion.so/3ea8f1ec11b4816d8adae5fa98d19815)
+Outputs land in: the draft in this thread; Fee model in Notion; the carry-over list in this thread
+Closes when: Fee model is Current with the change and its carry-over list is linked

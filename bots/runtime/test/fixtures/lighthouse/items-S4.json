@@ -1,0 +1,26 @@
+[
+  {
+    "n": 1,
+    "kind": "Decision",
+    "sentence": "launch moves to the new date",
+    "who": "Henry and 서준"
+  },
+  {
+    "n": 2,
+    "kind": "Task",
+    "sentence": "Henry sends Acme the fee sheet by Friday",
+    "who": "Henry"
+  },
+  {
+    "n": 3,
+    "kind": "Idea",
+    "sentence": "a weekly fee report on X",
+    "who": "서준 or Henry"
+  },
+  {
+    "n": 4,
+    "kind": "Open question",
+    "sentence": "do issuers pay the trade fee too?",
+    "who": "Henry"
+  }
+]

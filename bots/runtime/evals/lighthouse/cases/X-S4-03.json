@@ -1,0 +1,77 @@
+{
+  "bot": "lighthouse",
+  "id": "X-S4-03",
+  "set": "extra",
+  "packet": {
+    "bot": "lighthouse",
+    "now": "2026-10-02T10:00:00+09:00",
+    "event": {
+      "id": "E1",
+      "channel": "demo-lighthouse",
+      "ts": "1790000400.000100",
+      "thread_ts": null,
+      "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000400000100",
+      "author": {
+        "name": "Henry",
+        "kind": "person"
+      },
+      "text": "Here's the Granola note \"Henry + 서준: fee launch sync\" from our call on October 1, 2026 (Henry, 서준): https://notes.granola.ai/d/s4-demo"
+    },
+    "thread": [
+      {
+        "ts": "1790000400.000100",
+        "author": {
+          "name": "Henry",
+          "kind": "person"
+        },
+        "text": "Here's the Granola note \"Henry + 서준: fee launch sync\" from our call on October 1, 2026 (Henry, 서준): https://notes.granola.ai/d/s4-demo",
+        "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000400000100"
+      }
+    ],
+    "umbrellas": [],
+    "people": {
+      "Henry": {
+        "slack": "U_HENRY"
+      }
+    }
+  },
+  "reads": {
+    "read_thread": {
+      "https://endix.slack.com/archives/C0C61PKP10Q/p1790000400000100": {
+        "messages": [
+          {
+            "ts": "1790000400.000100",
+            "author": {
+              "name": "Henry",
+              "kind": "person"
+            },
+            "text": "Here's the Granola note \"Henry + 서준: fee launch sync\" from our call on October 1, 2026 (Henry, 서준): https://notes.granola.ai/d/s4-demo",
+            "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000400000100"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "open": {
+      "variant": "F5.1",
+      "title_prefix": "F5.1 · Henry + 서준: fee launch sync"
+    },
+    "mentions": [
+      {
+        "bot": "task-manager",
+        "step_id": "OPS-F0-07"
+      },
+      {
+        "bot": "doc-manager",
+        "step_id": "OPS-F5-01"
+      }
+    ],
+    "mention_contains": [
+      {
+        "step_id": "OPS-F5-01",
+        "text": "create the Call log row for END-DRY-1 · Henry + 서준: fee launch sync · 2026-10-01 · Henry, 서준 · Granola https://notes.granola.ai/d/s4-demo"
+      }
+    ]
+  }
+}

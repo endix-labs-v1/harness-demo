@@ -1,0 +1,59 @@
+{
+  "bot": "lighthouse",
+  "id": "T-LH-12",
+  "set": "check",
+  "packet": {
+    "bot": "lighthouse",
+    "now": "2026-10-02T10:00:00+09:00",
+    "event": {
+      "id": "E1",
+      "channel": "demo-lighthouse",
+      "ts": "1790000700.000100",
+      "thread_ts": null,
+      "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000700000100",
+      "author": {
+        "name": "Henry",
+        "kind": "person"
+      },
+      "text": "Redesign the onboarding screens."
+    },
+    "thread": [
+      {
+        "ts": "1790000700.000100",
+        "author": {
+          "name": "Henry",
+          "kind": "person"
+        },
+        "text": "Redesign the onboarding screens.",
+        "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000700000100"
+      }
+    ],
+    "umbrellas": [],
+    "people": {
+      "Henry": {
+        "slack": "U_HENRY"
+      }
+    }
+  },
+  "reads": {
+    "read_thread": {
+      "https://endix.slack.com/archives/C0C61PKP10Q/p1790000700000100": {
+        "messages": [
+          {
+            "ts": "1790000700.000100",
+            "author": {
+              "name": "Henry",
+              "kind": "person"
+            },
+            "text": "Redesign the onboarding screens.",
+            "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000700000100"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "no_flow": true,
+    "no_open": true
+  }
+}

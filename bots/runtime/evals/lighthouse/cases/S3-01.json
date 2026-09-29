@@ -1,0 +1,88 @@
+{
+  "bot": "lighthouse",
+  "id": "S3-01",
+  "set": "demo",
+  "packet": {
+    "bot": "lighthouse",
+    "now": "2026-10-02T10:00:00+09:00",
+    "event": {
+      "id": "E1",
+      "channel": "demo-lighthouse",
+      "ts": "1790000300.000100",
+      "thread_ts": null,
+      "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000300000100",
+      "author": {
+        "name": "Henry",
+        "kind": "person"
+      },
+      "text": "Add totalWithFee(amount) to FeeModel: the amount plus its fee."
+    },
+    "thread": [
+      {
+        "ts": "1790000300.000100",
+        "author": {
+          "name": "Henry",
+          "kind": "person"
+        },
+        "text": "Add totalWithFee(amount) to FeeModel: the amount plus its fee.",
+        "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000300000100"
+      }
+    ],
+    "umbrellas": [],
+    "people": {
+      "Henry": {
+        "slack": "U_HENRY"
+      }
+    }
+  },
+  "reads": {
+    "read_thread": {
+      "https://endix.slack.com/archives/C0C61PKP10Q/p1790000300000100": {
+        "messages": [
+          {
+            "ts": "1790000300.000100",
+            "author": {
+              "name": "Henry",
+              "kind": "person"
+            },
+            "text": "Add totalWithFee(amount) to FeeModel: the amount plus its fee.",
+            "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000300000100"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "open": {
+      "variant": "F2.1",
+      "title_prefix": "F2.1 · ",
+      "title_words": [
+        "totalWithFee"
+      ],
+      "steps": [
+        "OPS-F2-01",
+        "OPS-F2-02",
+        "OPS-F2-03",
+        "OPS-F2-04",
+        "OPS-F2-05",
+        "OPS-F2-06",
+        "OPS-F2-07",
+        "OPS-F2-08",
+        "OPS-F2-09",
+        "OPS-F2-10",
+        "OPS-F2-11",
+        "OPS-F2-12",
+        "OPS-F2-13",
+        "OPS-F2-14",
+        "OPS-F2-15",
+        "OPS-F2-16"
+      ]
+    },
+    "mentions": [
+      {
+        "bot": "task-manager",
+        "step_id": "OPS-F0-07"
+      }
+    ]
+  }
+}

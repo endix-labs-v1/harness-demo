@@ -1,0 +1,63 @@
+{
+  "bot": "lighthouse",
+  "id": "S5-01",
+  "set": "demo",
+  "packet": {
+    "bot": "lighthouse",
+    "now": "2026-10-02T10:00:00+09:00",
+    "event": {
+      "id": "E1",
+      "channel": "demo-lighthouse",
+      "ts": "1790000500.000100",
+      "thread_ts": null,
+      "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000500000100",
+      "author": {
+        "name": "Henry",
+        "kind": "person"
+      },
+      "text": "Book the venue for the fee AMA."
+    },
+    "thread": [
+      {
+        "ts": "1790000500.000100",
+        "author": {
+          "name": "Henry",
+          "kind": "person"
+        },
+        "text": "Book the venue for the fee AMA.",
+        "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000500000100"
+      }
+    ],
+    "umbrellas": [],
+    "people": {
+      "Henry": {
+        "slack": "U_HENRY"
+      }
+    }
+  },
+  "reads": {
+    "read_thread": {
+      "https://endix.slack.com/archives/C0C61PKP10Q/p1790000500000100": {
+        "messages": [
+          {
+            "ts": "1790000500.000100",
+            "author": {
+              "name": "Henry",
+              "kind": "person"
+            },
+            "text": "Book the venue for the fee AMA.",
+            "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000500000100"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "ask_back": "F7",
+    "ask_back_words": [
+      "venue",
+      "AMA"
+    ],
+    "no_open": true
+  }
+}

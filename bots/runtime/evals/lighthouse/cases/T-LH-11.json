@@ -1,0 +1,61 @@
+{
+  "bot": "lighthouse",
+  "id": "T-LH-11",
+  "set": "check",
+  "packet": {
+    "bot": "lighthouse",
+    "now": "2026-10-02T10:00:00+09:00",
+    "event": {
+      "id": "E1",
+      "channel": "demo-lighthouse",
+      "ts": "1790000100.000100",
+      "thread_ts": null,
+      "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000100000100",
+      "author": {
+        "name": "Henry",
+        "kind": "person"
+      },
+      "text": "Change the fee on the Fee model page from 30 to 25 bps. Get the Acme NDA signed today. Also, does the fee round up or down? And maybe a fee holiday in launch week?"
+    },
+    "thread": [
+      {
+        "ts": "1790000100.000100",
+        "author": {
+          "name": "Henry",
+          "kind": "person"
+        },
+        "text": "Change the fee on the Fee model page from 30 to 25 bps. Get the Acme NDA signed today. Also, does the fee round up or down? And maybe a fee holiday in launch week?",
+        "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000100000100"
+      }
+    ],
+    "umbrellas": [],
+    "people": {
+      "Henry": {
+        "slack": "U_HENRY"
+      }
+    }
+  },
+  "reads": {
+    "read_thread": {
+      "https://endix.slack.com/archives/C0C61PKP10Q/p1790000100000100": {
+        "messages": [
+          {
+            "ts": "1790000100.000100",
+            "author": {
+              "name": "Henry",
+              "kind": "person"
+            },
+            "text": "Change the fee on the Fee model page from 30 to 25 bps. Get the Acme NDA signed today. Also, does the fee round up or down? And maybe a fee holiday in launch week?",
+            "permalink": "https://endix.slack.com/archives/C0C61PKP10Q/p1790000100000100"
+          }
+        ]
+      }
+    }
+  },
+  "expect": {
+    "split": {
+      "n": 4,
+      "line_pattern": "^\\d\\. .+ → (F1\\.2 · END-\\S+|its own task thread|moved to #demo-questions|moved to #demo-ideas)$"
+    }
+  }
+}
