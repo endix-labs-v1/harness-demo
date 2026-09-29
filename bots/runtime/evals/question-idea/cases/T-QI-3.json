@@ -1,0 +1,41 @@
+{
+  "id": "S4-12-question",
+  "set": "replay",
+  "test": "T-QI-3",
+  "packet": {
+    "bot": "question-idea",
+    "now": "2026-10-02T10:00:00+09:00",
+    "event": {
+      "id": "E12",
+      "channel": "demo-questions",
+      "ts": "1790900020.000100",
+      "thread_ts": null,
+      "permalink": "https://endix.slack.com/archives/{questions}/p1790900020000100",
+      "author": {
+        "name": "Lighthouse",
+        "kind": "bot"
+      },
+      "text": "Moved from https://endix.slack.com/archives/{lighthouse}/p1790900019000100 · asked by Henry\n> do issuers pay the trade fee too?"
+    },
+    "thread": [
+      {
+        "ts": "1790900020.000100",
+        "author": {
+          "name": "Lighthouse",
+          "kind": "bot"
+        },
+        "text": "Moved from https://endix.slack.com/archives/{lighthouse}/p1790900019000100 · asked by Henry\n> do issuers pay the trade fee too?",
+        "permalink": "https://endix.slack.com/archives/{questions}/p1790900020000100"
+      }
+    ],
+    "umbrellas": [],
+    "people": {
+      "Henry": {
+        "slack": "U_HENRY"
+      }
+    }
+  },
+  "expect": {
+    "reply_matches": "^The Current docs don't say this:[\\s\\S]*Checked:[\\s\\S]*https://www\\.notion\\.so/"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "Q3",
+  "set": "E-QI",
+  "packet": {
+    "bot": "question-idea",
+    "now": "2026-10-02T10:00:00+09:00",
+    "event": {
+      "id": "E12",
+      "channel": "demo-ideas",
+      "ts": "1790900003.000100",
+      "thread_ts": null,
+      "permalink": "https://endix.slack.com/archives/{ideas}/p1790900003000100",
+      "author": {
+        "name": "Henry",
+        "kind": "person"
+      },
+      "text": "Should the fee be lower?"
+    },
+    "thread": [
+      {
+        "ts": "1790900003.000100",
+        "author": {
+          "name": "Henry",
+          "kind": "person"
+        },
+        "text": "Should the fee be lower?",
+        "permalink": "https://endix.slack.com/archives/{ideas}/p1790900003000100"
+      }
+    ],
+    "umbrellas": [],
+    "people": {
+      "Henry": {
+        "slack": "U_HENRY"
+      }
+    }
+  },
+  "expect": {
+    "ask_back": true
+  }
+}

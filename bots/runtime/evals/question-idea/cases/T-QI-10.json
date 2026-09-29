@@ -1,0 +1,115 @@
+{
+  "id": "S5-21-reopen",
+  "set": "replay",
+  "test": "T-QI-10",
+  "packet": {
+    "bot": "question-idea",
+    "now": "2026-10-02T10:00:00+09:00",
+    "event": {
+      "id": "E15",
+      "channel": "demo-lighthouse",
+      "ts": "1790899000.000100",
+      "thread_ts": "1790890000.000100",
+      "permalink": "https://endix.slack.com/archives/{lighthouse}/p1790899000000100?thread_ts=1790890000.000100&cid={lighthouse}",
+      "author": {
+        "name": "Checker",
+        "kind": "bot"
+      },
+      "text": "<@U_QI> OPS-F7-10 · END-520 is due: reopen https://endix.slack.com/archives/{ideas}/p1790860000000100"
+    },
+    "thread": [
+      {
+        "ts": "1790890000.000100",
+        "author": {
+          "name": "Lighthouse",
+          "kind": "bot"
+        },
+        "text": "Revisit from https://endix.slack.com/archives/{ideas}/p1790860000000100: fee holiday in launch week.",
+        "permalink": "https://endix.slack.com/archives/{lighthouse}/p1790890000000100"
+      },
+      {
+        "ts": "1790899000.000100",
+        "author": {
+          "name": "Checker",
+          "kind": "bot"
+        },
+        "text": "<@U_QI> OPS-F7-10 · END-520 is due: reopen https://endix.slack.com/archives/{ideas}/p1790860000000100",
+        "permalink": "https://endix.slack.com/archives/{lighthouse}/p1790899000000100?thread_ts=1790890000.000100&cid={lighthouse}"
+      }
+    ],
+    "umbrellas": [],
+    "people": {
+      "Henry": {
+        "slack": "U_HENRY"
+      }
+    }
+  },
+  "reads": {
+    "read_thread": {
+      "https://endix.slack.com/archives/{ideas}/p1790860000000100": {
+        "messages": [
+          {
+            "ts": "1790860000.000100",
+            "author": {
+              "name": "Lighthouse",
+              "kind": "bot"
+            },
+            "text": "Moved from … · asked by Henry\n> maybe a fee holiday in launch week?",
+            "permalink": "https://endix.slack.com/archives/{ideas}/p1790860000000100"
+          },
+          {
+            "ts": "1790860100.000100",
+            "author": {
+              "name": "Question/idea agent",
+              "kind": "bot"
+            },
+            "text": "Context from the docs:\n- The fee is 30 bps (0.30%) (https://www.notion.so/{page:fee_model})\n- Launch week is in the launch plan (https://www.notion.so/{page:launch_plan})\nEarlier threads: none\nPages it would touch: https://www.notion.so/{page:fee_model}, https://www.notion.so/{page:launch_plan}, https://www.notion.so/{page:faq_fees}",
+            "permalink": "https://endix.slack.com/archives/{ideas}/p1790860100000100?thread_ts=1790860000.000100&cid={ideas}"
+          },
+          {
+            "ts": "1790866000.000100",
+            "author": {
+              "name": "Henry",
+              "kind": "person"
+            },
+            "text": "Later: after launch, once we have a month of volume; revisit on November 1, 2026.",
+            "permalink": "https://endix.slack.com/archives/{ideas}/p1790866000000100?thread_ts=1790860000.000100&cid={ideas}"
+          }
+        ]
+      }
+    },
+    "notion_read": {
+      "{page:fee_model}": {
+        "id": "{page:fee_model}",
+        "url": "https://www.notion.so/{page:fee_model}",
+        "title": "Fee model",
+        "properties": {
+          "Status": "Current"
+        },
+        "markdown": "# Fee model\nThe trade fee is 25 bps (0.25%), rounded down to the smallest unit.\n## Change log\n- 2026-10-02 · Fee changed from 30 bps (0.30%) to 25 bps (0.25%) · Henry's ask in the thread · END-512"
+      },
+      "{page:launch_plan}": {
+        "id": "{page:launch_plan}",
+        "url": "https://www.notion.so/{page:launch_plan}",
+        "title": "Launch plan",
+        "properties": {
+          "Status": "Current"
+        },
+        "markdown": "# Launch plan\n## Change log\n- 2026-10-02 · Checked against Fee model (END-512): no change, the launch date doesn't depend on the fee"
+      },
+      "{page:faq_fees}": {
+        "id": "{page:faq_fees}",
+        "url": "https://www.notion.so/{page:faq_fees}",
+        "title": "FAQ · Fees",
+        "properties": {
+          "Status": "Current"
+        },
+        "markdown": "# FAQ · Fees\n## Change log\n- 2026-09-20 · Page created · base · END-500"
+      }
+    }
+  },
+  "expect": {
+    "reply_starts": "Reopened for END-520, the revisit that came due. Since the Later line on 2026-10-02:",
+    "reply_exact": "<@Task manager> OPS-F7-11 · close END-520 with Reopened: https://endix.slack.com/archives/{ideas}/p1790860000000100"
+  }
+}

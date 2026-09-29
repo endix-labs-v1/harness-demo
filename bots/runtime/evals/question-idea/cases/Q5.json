@@ -1,0 +1,42 @@
+{
+  "id": "Q5",
+  "set": "E-QI",
+  "packet": {
+    "bot": "question-idea",
+    "now": "2026-10-02T10:00:00+09:00",
+    "event": {
+      "id": "E12",
+      "channel": "demo-ideas",
+      "ts": "1790900005.000100",
+      "thread_ts": null,
+      "permalink": "https://endix.slack.com/archives/{ideas}/p1790900005000100",
+      "author": {
+        "name": "Henry",
+        "kind": "person"
+      },
+      "text": "Idea: a fee rebate for our first 100 users."
+    },
+    "thread": [
+      {
+        "ts": "1790900005.000100",
+        "author": {
+          "name": "Henry",
+          "kind": "person"
+        },
+        "text": "Idea: a fee rebate for our first 100 users.",
+        "permalink": "https://endix.slack.com/archives/{ideas}/p1790900005000100"
+      }
+    ],
+    "umbrellas": [],
+    "people": {
+      "Henry": {
+        "slack": "U_HENRY"
+      }
+    }
+  },
+  "expect": {
+    "reply_starts": "Context from the docs:",
+    "reply_matches": "^Earlier threads: [\\s\\S]*^Pages it would touch: ",
+    "no_view": true
+  }
+}

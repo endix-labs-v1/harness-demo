@@ -107,9 +107,9 @@ describe("start (SYS §4.1)", () => {
     tokens.stop();
     expect(lines[0]).toBe("bot · slack user · linear app · notion integration · tools");
     expect(lines).toHaveLength(4);
-    expect(lines[1]).toBe("lighthouse · lighthouse (U_LH) · lighthouse (demo) · Endix readers (demo) · 6 tools: read_thread, linear_get, linear_find, notion_search, notion_read, steps");
-    expect(lines[2]).toBe("task-manager · task_manager (U_TM) · task-manager (demo) · - · 4 tools: read_thread, linear_get, linear_find, steps");
-    expect(lines[3]).toBe("doc-manager · doc_manager (U_DM) · Checker (demo) (reader) · Endix doc manager (demo) · 3 tools: read_thread, notion_search, notion_read");
+    expect(lines[1]).toBe("lighthouse · lighthouse (U_LH) · lighthouse (demo) · Endix readers (demo) · 14 tools: read_thread, linear_get, linear_find, notion_search, notion_read, steps, post_reply, move_to, start_task_thread, open_umbrella, mention, post_ask, start_followup_thread, post_items_as_asks");
+    expect(lines[2]).toBe("task-manager · task_manager (U_TM) · task-manager (demo) · - · 11 tools: read_thread, linear_get, linear_find, steps, create_steps, comment, set_fields, link, fill_done_when, close, post_reply");
+    expect(lines[3]).toBe("doc-manager · doc_manager (U_DM) · Checker (demo) (reader) · Endix doc manager (demo) · 12 tools: read_thread, notion_search, notion_read, create_page, replace_text, add_change_log_line, add_checked_against, set_fields, list_feeds, call_log_create, call_log_update, post_reply");
     expect(r.botIds).toEqual({ B_LH: "Lighthouse", B_TM: "Task manager", B_DM: "Doc manager" });
   });
 });
