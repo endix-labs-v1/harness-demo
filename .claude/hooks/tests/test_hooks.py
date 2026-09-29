@@ -49,8 +49,19 @@ def test_h2_sees_chained_commands():
 
 
 # H3: people decide
-def test_h3_refuses_merge():
-    assert run("h2_h3_git.py", bash("gh pr merge 12 --squash"))[0] == 2
+def fake_gh(tmp_path, decision):
+    f = tmp_path / "gh"; f.write_text(f"#!/bin/sh\necho {decision}\n"); f.chmod(0o755)
+    return {"ENDIX_GH": str(f)}
+
+def test_h3_refuses_merge_without_approval(tmp_path):
+    code, err = run("h2_h3_git.py", bash("gh pr merge 12 --squash"), fake_gh(tmp_path, "REVIEW_REQUIRED"))
+    assert code == 2 and "no approval" in err
+
+def test_h3_refuses_merge_when_unknown():
+    assert run("h2_h3_git.py", bash("gh pr merge 12"), {"ENDIX_GH": "/nonexistent/gh"})[0] == 2
+
+def test_h3_allows_merge_after_approval(tmp_path):
+    assert run("h2_h3_git.py", bash("gh pr merge 12 --squash"), fake_gh(tmp_path, "APPROVED"))[0] == 0
 
 def test_h3_refuses_approve():
     assert run("h2_h3_git.py", bash("gh pr review 12 --approve"))[0] == 2

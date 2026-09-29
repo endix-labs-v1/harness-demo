@@ -8,7 +8,7 @@ All you need is trust, and trust comes from walls, not from instructions. AGENTS
 | -- | -- | -- |
 | H1 hook | an entry agent writing in Notion or Linear | `.claude/hooks/h1_records.py` |
 | H2 hook | a push from a branch with no umbrella key, or to main | `.claude/hooks/h2_h3_git.py` |
-| H3 hook | an agent merging, approving, or posting "go" / "no" | `.claude/hooks/h2_h3_git.py` |
+| H3 hook | an agent approving, posting "go" / "no", or merging a PR no person approved | `.claude/hooks/h2_h3_git.py` |
 | CI: umbrella key | a PR that names no Linear umbrella | `scripts/check_umbrella_key.py` |
 | CI: NatSpec | a public or external function without NatSpec | `scripts/check_natspec.py` |
 | CI: harness rule ID | a harness change that cites no rule, or a skill change with no eval | `scripts/check_rule_id.py` |

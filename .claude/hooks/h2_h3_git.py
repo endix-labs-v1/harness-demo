@@ -5,13 +5,14 @@ H2 (OPS-F0-36, OPS-A4-11): a push from a branch whose name carries no umbrella
 key (END-123) is refused, so nothing reaches GitHub outside a tree. A push to
 main is refused the same way.
 
-H3 (OPS-F2-33): people decide. An agent never merges a PR, never approves one,
-and never posts "go" or "no" on a discussion.
+H3 (OPS-F2-33, OPS-F2-10): people decide. An agent never approves a PR, never
+posts "go" or "no" on a discussion, and merges only a PR that Henry or 서준 have
+approved (branch protection refuses the rest on GitHub too).
 
 Claude Code runs this before every Bash call; exit 2 refuses it.
 """
 from __future__ import annotations
-import json, re, shlex, subprocess, sys
+import json, os, re, shlex, subprocess, sys
 
 KEY = re.compile(r"(?i)\bend-\d+")
 
@@ -34,6 +35,16 @@ def pushed_branch(args: list[str], cwd: str | None) -> str:
         if src and src != "HEAD":
             return src.replace("refs/heads/", "")
     return current_branch(cwd)
+
+
+def review_decision(pr: str | None, cwd: str | None) -> str:
+    """GitHub's review decision for a PR ('APPROVED', ...), or '' when it can't be read."""
+    gh = os.environ.get("ENDIX_GH", "gh")
+    cmd = [gh, "pr", "view"] + ([pr] if pr else []) + ["--json", "reviewDecision", "-q", ".reviewDecision"]
+    try:
+        return subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=15).stdout.strip()
+    except Exception:
+        return ""
 
 
 def split_commands(command: str) -> list[list[str]]:
@@ -65,8 +76,10 @@ def decide(command: str, cwd: str | None = None) -> str | None:
                         "umbrella key. Name it from its Linear step, like "
                         "henrychoi/end-123-short-title. No key: post the ask in #lighthouse.")
         if toks[:3] == ["gh", "pr", "merge"]:
-            return ("Refused by the harness (H3, OPS-F2-33): agents never merge. "
-                    "Henry or 서준 merge after green CI and their approval.")
+            pr = next((t for t in toks[3:] if not t.startswith("-")), None)
+            if review_decision(pr, cwd) != "APPROVED":
+                return ("Refused by the harness (H3, OPS-F2-10, OPS-F2-33): this PR has no approval "
+                        "from Henry or 서준. Post the PR link in the umbrella's thread and wait.")
         if toks[:3] == ["gh", "pr", "review"] and any(t in ("--approve", "-a") for t in toks):
             return ("Refused by the harness (H3, OPS-F2-33): agents never approve a PR. "
                     "Ask for a review in the umbrella's thread.")

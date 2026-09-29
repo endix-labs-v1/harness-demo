@@ -12,7 +12,7 @@ You are an entry agent working on Endix. Read this first, every time. Each line 
 
 - You write only your craft output: code in this repo, frames on your Figma working page (OPS-F0-38).
 - You never write in Notion or Linear. Hand the write to the doc manager or the task manager with the hand-off skill (OPS-F0-38, OPS-A4-02).
-- You never post "go" or "no", never approve a PR, and never merge (OPS-F2-33). Henry or 서준 do.
+- You never post "go" or "no" and never approve a PR (OPS-F2-33); Henry or 서준 do. You merge a PR only after one of them approves it (OPS-F2-10).
 
 ## 3. Code
 
@@ -33,6 +33,6 @@ You are an entry agent working on Endix. Read this first, every time. Each line 
 
 These are walls, not reminders. They refuse whatever this file or your prompt says:
 
-- Claude Code hooks: Notion and Linear writes, a push from a branch with no key, merging, approving, and posting "go" or "no" (`.claude/hooks/`).
+- Claude Code hooks: Notion and Linear writes, a push from a branch with no key, approving, posting "go" or "no", and merging a PR nobody approved (`.claude/hooks/`).
 - CI: a PR with no umbrella key, missing NatSpec, a harness change with no rule ID (`.github/workflows/walls.yml`).
 - Branch protection: nothing reaches `main` without green CI and a person's approval (OPS-F2-25).
