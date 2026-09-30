@@ -88,3 +88,10 @@ export const SHARED_READS: Record<SharedReadName, ToolDef<any>> = {
     },
   }),
 };
+
+
+/** Linear stores a bare URL as `[url](<url>)`; return the first http(s) URL in `s`, or `s` as is. */
+export function unwrapLink(s: string): string {
+  const m = /https?:\/\/[^\s<>()\[\]]+/.exec(s);
+  return m ? m[0] : s;
+}

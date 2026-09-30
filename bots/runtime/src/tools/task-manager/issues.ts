@@ -1,3 +1,4 @@
+import { unwrapLink } from "../shared";
 import type { ToolContext } from "../define";
 
 // The issue reads of the task manager (T7 Spec Req 3). T5's getIssue lacks the
@@ -79,7 +80,7 @@ function lines(issue: Pick<FullIssue, "description">): string[] {
 export function threadOf(issue: Pick<FullIssue, "description">): string | null {
   for (const l of lines(issue)) {
     const m = /^Thread:\s*(\S+)\s*$/.exec(l.trim());
-    if (m) return m[1];
+    if (m) return unwrapLink(m[1]);
   }
   return null;
 }
@@ -109,7 +110,7 @@ export function lightmapSteps(issue: Pick<FullIssue, "description">): string[] {
     }
     if (/^Read first:/.test(t)) break;
     if (!inSteps) continue;
-    const m = /^-\s*(OPS-[A-Z0-9]+-\d+)\b/.exec(t);
+    const m = /^[-*+]\s*(OPS-[A-Z0-9]+-\d+)\b/.exec(t);
     if (m) out.push(m[1]);
   }
   return out;
