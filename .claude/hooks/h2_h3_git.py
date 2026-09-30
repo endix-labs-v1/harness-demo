@@ -32,6 +32,16 @@ GH_API_VALUE_FLAGS = ("-X", "--method", "-H", "--header", "-f", "-F", "--field",
                       "--input", "-q", "--jq", "-t", "--template", "--hostname", "-p",
                       "--preview", "--cache")
 GH_API_FIELD_FLAGS = ("-f", "-F", "--field", "--raw-field", "--input")
+# gh pr merge flags whose value is the next token
+GH_MERGE_VALUE_FLAGS = ("-R", "--repo", "-t", "--subject", "-b", "--body", "-F", "--body-file",
+                        "-A", "--author-email", "--match-head-commit")
+# A refspec that asks git for the current branch, in $(...) or backticks. Other subshells
+# stay as written, so the hook doesn't guess what they print.
+CURRENT_BRANCH = re.compile(r"(?:\$\(|`)\s*git\s+(?:branch\s+--show-current|rev-parse\s+--abbrev-ref\s+HEAD"
+                            r"|symbolic-ref\s+(?:-q\s+)?--short\s+(?:-q\s+)?HEAD)\s*(?:\)|`)")
+# "go" or "no" as a discussion comment's body, also JSON-escaped, or as any field's value
+GO_BODY = re.compile(r"body\\?[\"']?\s*[:=]\s*\\?[\"']?\s*(go|no)\b", re.I)
+GO_FIELD = re.compile(r"(?:^|\s)(?:-[fF]|--field|--raw-field)(?:=|\s+)?[\"']?\w+=[\"']?\s*(go|no)\b", re.I)
 
 REVIEWS = re.compile(r"^repos/[^/]+/[^/]+/pulls/\d+/reviews(/.*)?$")
 MERGE = re.compile(r"^repos/([^/]+)/([^/]+)/pulls/(\d+)/merge/?$")
@@ -55,8 +65,15 @@ def current_branch(cwd: str | None) -> str:
 
 
 def pushed_branch(args: list[str], cwd: str | None) -> str:
-    """The branch a `git push` sends: the last refspec's source, or the current branch."""
-    rest = [a for a in args if not a.startswith("-")]
+    """The branch a `git push` sends: the last refspec's source, or the current branch.
+
+    A refspec that asks git for the current branch ("$(git branch --show-current)") counts
+    as HEAD. A lone backslash (a line continuation shlex couldn't read) is no refspec.
+    """
+    joined = " ".join(args)
+    if CURRENT_BRANCH.search(joined):
+        args = CURRENT_BRANCH.sub("HEAD", joined).split()
+    rest = [a for a in args if not a.startswith("-") and a != "\\"]
     # git push [remote] [refspec...]
     if len(rest) >= 2:
         ref = rest[-1].lstrip("+")
@@ -87,6 +104,27 @@ def review_decision_by_node(node_id: str, cwd: str | None) -> str:
         return subprocess.run(cmd, cwd=cwd, capture_output=True, text=True, timeout=15).stdout.strip()
     except Exception:
         return ""
+
+
+def merge_target(args: list[str]) -> tuple[str | None, str | None]:
+    """For the tokens after `gh pr merge`: (the PR argument, the -R/--repo value), past flag values."""
+    pr = repo = None
+    i = 0
+    while i < len(args):
+        tok = args[i]
+        if tok in GH_MERGE_VALUE_FLAGS:
+            if tok in ("-R", "--repo") and i + 1 < len(args):
+                repo = args[i + 1]
+            i += 2
+            continue
+        if tok.startswith("--repo="):
+            repo = tok.split("=", 1)[1]
+        elif tok.startswith("-R") and len(tok) > 2:
+            repo = tok[2:].removeprefix("=")
+        elif not tok.startswith("-") and pr is None:
+            pr = tok
+        i += 1
+    return pr, repo
 
 
 def split_commands(command: str) -> list[list[str]]:
@@ -212,6 +250,7 @@ def decide_h3_api(method: str, endpoint: str, args: list[str], command: str,
 
 
 def decide(command: str, cwd: str | None = None) -> str | None:
+    command = command.replace("\\\n", " ")  # backslash-newline continues the line
     for toks in split_commands(command):
         prog, args = program(toks)
         sub = git_subcommand(args) if prog == "git" else None
@@ -227,14 +266,14 @@ def decide(command: str, cwd: str | None = None) -> str | None:
         if prog != "gh":
             continue
         if args[:2] == ["pr", "merge"]:
-            pr = next((t for t in args[2:] if not t.startswith("-")), None)
-            if review_decision(pr, cwd) != "APPROVED":
+            pr, repo = merge_target(args[2:])
+            if review_decision(pr, cwd, repo=repo) != "APPROVED":
                 return NO_APPROVAL
         if args[:2] == ["pr", "review"] and any(t in ("--approve", "-a") for t in args):
             return NO_SELF_APPROVE
-        if args[:1] == ["api"] and "addDiscussionComment" in " ".join(toks):
-            body = " ".join(toks)
-            if re.search(r"body[\"']?\s*[:=]\s*[\"']?\s*(go|no)\b", body, re.I):
+        # The whole command: a GraphQL query often spans lines, and split_commands splits on them.
+        if args[:1] == ["api"] and "addDiscussionComment" in command:
+            if GO_BODY.search(command) or GO_FIELD.search(command):
                 return NO_GO
         api = gh_api(args)
         if api:

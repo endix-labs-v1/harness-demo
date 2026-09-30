@@ -28,12 +28,20 @@ export interface Draft {
 
 const DRAFT_START = "OPS-F1-10 · Draft for ";
 
-/** The latest `OPS-F1-10 · Draft for …` message, with the text inside its Now and New quotes. */
+/** Where the draft starts in a message: at the start of any line (another line may come first), or -1. */
+function draftStart(text: string): number {
+  if (text.startsWith(DRAFT_START)) return 0;
+  const i = text.indexOf("\n" + DRAFT_START);
+  return i < 0 ? -1 : i + 1;
+}
+
+/** The latest message holding an `OPS-F1-10 · Draft for …` line, with the text inside its Now and New quotes. */
 export function latestDraft(thread: ThreadMsg[]): Draft | null {
   for (let i = thread.length - 1; i >= 0; i--) {
     const m = thread[i];
-    if (!m.text.startsWith(DRAFT_START)) continue;
-    const ls = m.text.split("\n");
+    const at = draftStart(m.text);
+    if (at < 0) continue;
+    const ls = m.text.slice(at).split("\n");
     const pick = (re: RegExp) => {
       for (const l of ls) {
         const r = re.exec(l);

@@ -8,6 +8,7 @@ H1_SLACK = ("Refused by the harness (H1, OPS-F0-38): entry agents post in Slack 
             "endix-entry-slack, as the Entry agent. Use post_in_thread or hand_off.")
 H3_APPROVE = ("Refused by the harness (H3, OPS-F2-33): agents never approve a PR. "
               "Ask for a review in the umbrella's thread.")
+H3_GO = "Refused by the harness (H3, OPS-F2-33): only Henry or 서준 post \"go\" or \"no\" on a discussion."
 H4 = ("Refused by the harness (H4, OPS-A4-11, OPS-F2-25): entry agents work on GitHub through "
       "branches and PRs only. Settings, branch protection, collaborators, secrets and force "
       "pushes are Henry's.")
@@ -140,6 +141,37 @@ def test_t_h_32_full_path_git_push_refused():
         assert code == 2 and "umbrella key" in err, cmd
         assert_refused(err, "H2")
 
+def git_repo(path, branch):
+    """A throwaway repo on `branch`, for pushes the hook reads as the current branch."""
+    subprocess.run(["git", "init", "-q", "-b", branch, str(path)], check=True)
+    subprocess.run(["git", "-C", str(path), "-c", "user.name=t", "-c", "user.email=t@example.com",
+                    "-c", "commit.gpgsign=false", "commit", "-q", "--allow-empty", "-m", "x"], check=True)
+    return str(path)
+
+def test_h2_current_branch_subshell_and_continuation_pass(tmp_path):
+    """No ID · A keyed branch pushed as "$(git branch --show-current)", in backticks or across a backslash-newline passes (S3-11)."""
+    repo = git_repo(tmp_path / "keyed", "henrychoi/end-123-fix-rounding")
+    for cmd in ('git push -u origin "$(git branch --show-current)"',
+                "git push -u origin $(git branch --show-current)",
+                "git push -u origin `git rev-parse --abbrev-ref HEAD`",
+                "git push -u origin \\\n  henrychoi/end-123-fix-rounding",
+                "git push -u origin \\"):
+        assert run("h2_h3_git.py", {**bash(cmd), "cwd": repo})[0] == 0, cmd
+
+def test_h2_subshell_and_continuation_still_refused(tmp_path):
+    """No ID · The same forms from main or a keyless branch, main across a continuation, and a subshell the hook can't read are refused."""
+    main = git_repo(tmp_path / "main", "main")
+    keyless = git_repo(tmp_path / "keyless", "quick-fix")
+    keyed = git_repo(tmp_path / "keyed", "henrychoi/end-123-fix-rounding")
+    for cmd, cwd in (('git push -u origin "$(git branch --show-current)"', main),
+                     ('git push -u origin "$(git branch --show-current)"', keyless),
+                     ("git push -u origin \\\n  quick-fix", keyed),
+                     ("git push origin main \\", keyed),
+                     ("git push origin $(echo main)", keyed)):
+        code, err = run("h2_h3_git.py", {**bash(cmd), "cwd": cwd})
+        assert code == 2, (cmd, cwd)
+        assert_refused(err, "H2")
+
 
 # H3: people decide
 def fake_gh(tmp_path, decision):
@@ -161,6 +193,28 @@ def test_h3_refuses_merge_when_unknown():
 def test_h3_allows_merge_after_approval(tmp_path):
     """T-H-16 · `gh pr merge` passes once a person approved."""
     assert run("h2_h3_git.py", bash("gh pr merge 12 --squash"), fake_gh(tmp_path, "APPROVED"))[0] == 0
+
+def fake_gh_for(path, argv):
+    """A gh that answers APPROVED only when it is called with exactly `argv`."""
+    path.mkdir()
+    f = path / "gh"
+    f.write_text(f'#!/bin/sh\nif [ "$*" = "{argv}" ]; then echo APPROVED; else echo REVIEW_REQUIRED; fi\n')
+    f.chmod(0o755)
+    return {"ENDIX_GH": str(f)}
+
+def test_h3_merge_reads_the_pr_past_flag_values(tmp_path):
+    """No ID · An approved `gh pr merge` passes when flags with values come first; the -R/--repo repo is the one checked (S3-20)."""
+    here = fake_gh_for(tmp_path / "here", "pr view 12 --json reviewDecision -q .reviewDecision")
+    for cmd in ("gh pr merge 12 --squash", "gh pr merge --subject 'Add totalWithFee' 12 --squash",
+                "gh pr merge -t x -b 'y z' --match-head-commit abc123 12"):
+        assert run("h2_h3_git.py", bash(cmd), here)[0] == 0, cmd
+    there = fake_gh_for(tmp_path / "there", "pr view 12 --repo o/r --json reviewDecision -q .reviewDecision")
+    for cmd in ("gh pr merge -R o/r 12 --squash", "gh pr merge --repo=o/r 12", "gh pr merge 12 --squash --repo o/r"):
+        assert run("h2_h3_git.py", bash(cmd), there)[0] == 0, cmd
+    for cmd in ("gh pr merge -R o/r 13 --squash", "gh pr merge 12 --squash"):
+        code, err = run("h2_h3_git.py", bash(cmd), there)
+        assert code == 2 and "no approval" in err, cmd
+        assert_refused(err, "H3")
 
 def test_h3_refuses_approve():
     """T-H-17 · `gh pr review --approve` and `-a` are refused."""
@@ -188,6 +242,32 @@ def test_t_h_20_no_on_discussion_refused():
     code, err = run("h2_h3_git.py", bash(cmd))
     assert code == 2
     assert_refused(err, "H3")
+
+GQL_COMMENT_VAR = "mutation($t: String!) { addDiscussionComment(input: {discussionId: \"D1\", body: $t}) { comment { id } } }"
+
+def test_h3_refuses_go_across_lines_and_in_a_field():
+    """No ID · "go" or "no" is refused when the query spans lines, the line is continued, or the text comes in a field (S3-08)."""
+    for cmd in ("gh api graphql -f query='\nmutation {\n  addDiscussionComment(input: {discussionId: \"D1\", body: \"go\"}) {\n"
+                "    comment { id }\n  }\n}'",
+                "gh api graphql \\\n  -f query='mutation { addDiscussionComment(input: {discussionId: \"D1\", body: \"no\"}) "
+                "{ comment { id } } }'",
+                f"gh api graphql -f query='{GQL_COMMENT_VAR}' -f t=go",
+                f"gh api graphql -F 't=No' -f query='{GQL_COMMENT_VAR}'",
+                'gh api graphql -f query="mutation { addDiscussionComment(input: {discussionId: \\"D1\\", '
+                'body: \\"go\\"}) { comment { id } } }"'):
+        code, err = run("h2_h3_git.py", bash(cmd))
+        assert code == 2 and err.strip() == H3_GO, cmd
+        assert_refused(err, "H3")
+
+def test_h3_allows_proposed_conclusion_comment():
+    """No ID · The agent's own discussion comment passes H3, in one line, across lines or in a field (S3-06)."""
+    text = "Proposed conclusion: add totalWithFee(amount), rounded down as feeOf"
+    for cmd in (f"gh api graphql -f query='mutation {{ addDiscussionComment(input: {{discussionId: \"D1\", body: \"{text}\"}}) "
+                "{ comment { id } } }'",
+                f"gh api graphql -f query='mutation {{\n  addDiscussionComment(input: {{discussionId: \"D1\", body: \"{text}\"}}) {{\n"
+                "    comment { id }\n  }\n}'",
+                f"gh api graphql -f query='{GQL_COMMENT_VAR}' -f t='{text}' -f id=D_kwDO1"):
+        assert run("h2_h3_git.py", bash(cmd))[0] == 0, cmd
 
 def test_t_h_33_api_approve_refused():
     """T-H-33 · Approving through the REST API is refused with the H3 approve text."""

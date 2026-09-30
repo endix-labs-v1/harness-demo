@@ -299,6 +299,19 @@ const threadS3DraftOk = () =>
     { ts: "1790002400.000100", user: "U_EA", text: `<@U_DM> OPS-F2-13 · apply the draft above to Code doc · FeeModel · ${urlOf(CODE)}` },
   ]);
 
+/** SEAM-4: the OPS-F2-12 line and the draft in one post, then Henry's OK and the hand-off. */
+const threadS3CombinedOk = () =>
+  thread([
+    { ts: "1790002000.000100", user: "U_HENRY", text: "Add totalWithFee to FeeModel." },
+    {
+      ts: "1790002200.000100",
+      user: "U_EA",
+      text: `OPS-F2-12 · Code doc · FeeModel: What the code does gains totalWithFee\n${draftText("Code doc · FeeModel", "What the code does", S3_NOW, S3_NEW, "totalWithFee is merged (END-9520)")}`,
+    },
+    HENRY_OK("1790002300.000100"),
+    { ts: "1790002400.000100", user: "U_EA", text: `<@U_DM> OPS-F2-13 · apply the draft above to Code doc · FeeModel · ${urlOf(CODE)}` },
+  ]);
+
 /** A draft with the given Now line, then Henry's OK, then the hand-off (T-DM-7). */
 const threadDraftOk = (now: string, next: string, page: string) =>
   thread([
@@ -619,6 +632,17 @@ describe("doc manager · replace_text (W-14, OPS-F1-35)", () => {
       { content: "amount + feeOf(amount)", code: true },
       { content: ", the fee rounded down the same way." },
     ]);
+  });
+
+  it("replace_text: the OPS-F2-12 line and the draft in one post still count as the draft (SEAM-4)", async () => {
+    const th = threadS3CombinedOk();
+    expect(latestDraft(th.thread)).toMatchObject({ ts: "1790002200.000100", page: "Code doc · FeeModel", section: "What the code does", now: S3_NOW, new: S3_NEW, why: "totalWithFee is merged (END-9520)" });
+    const n = notionWith(basePageSpecs());
+    const r = await call("replace_text", { page: CODE, old: S3_NOW, new: S3_NEW, ok_permalink: th.permalinkOf("1790002300.000100") }, ctxFor({ notion: n, thread: th }));
+    expect(r.title).toBe("Code doc · FeeModel");
+    expect(writesOf(n)).toHaveLength(1);
+    const midLine = thread([S2_ROOT, { ts: "1790000200.000100", user: "U_EA", text: `Next: ${draftText("Fee model", "The rule", S2_NOW, S2_NEW, S2_WHY)}` }]);
+    expect(latestDraft(midLine.thread)).toBeNull();
   });
 
   it("T-DM-6: a new that differs from the draft's New by one character: the word-for-word refusal", async () => {
