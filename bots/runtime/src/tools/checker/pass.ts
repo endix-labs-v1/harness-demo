@@ -1,3 +1,4 @@
+import { unwrapLink } from "../shared";
 import { readThread } from "../../clients/slack";
 import { trimForGuard } from "../../guard/person-line";
 import type { ContextPacket } from "../../packet/build";
@@ -18,7 +19,10 @@ const CLOSED_TYPES = ["completed", "canceled"];
 
 const isOpen = (n: any) => !CLOSED_NAMES.has(n?.state?.name) && !CLOSED_TYPES.includes(n?.state?.type);
 const inProject = (ctx: ToolContext, n: any) => !n?.project?.id || n.project.id === ctx.config.linear.project_id;
-const lineOf = (description: string | null | undefined, label: string) => new RegExp(`^${label}: *(.+?) *$`, "m").exec(String(description ?? ""))?.[1] ?? null;
+const lineOf = (description: string | null | undefined, label: string) => {
+  const v = new RegExp(`^${label}: *(.+?) *$`, "m").exec(String(description ?? ""))?.[1] ?? null;
+  return v && label === "Thread" ? unwrapLink(v) : v;
+};
 
 /**
  * The Later tasks of the project with their inverse `blocks` relations, in one query of

@@ -1,3 +1,4 @@
+import { unwrapLink } from "../shared";
 import { z } from "zod";
 import { getIssue } from "../../clients/linear";
 import { fenceProject } from "../../fence/project";
@@ -21,7 +22,8 @@ export const closeQuestion = defineTool({
     const labels: string[] = (issue.labels?.nodes ?? []).map((l: { name: string }) => l.name);
     if (!labels.includes("Question")) return { error: `${input.issue} is not an open question (no label Question).` };
     if (!/^https?:\/\/\S+$/.test(input.docs_link.trim())) return { error: "docs_link is the URL of the page that now says the answer (OPS-F4-15)." };
-    const threadPermalink = /^Thread: (\S+)/m.exec(String(issue.description ?? ""))?.[1];
+    const threadRaw = /^Thread: (\S+)/m.exec(String(issue.description ?? ""))?.[1];
+    const threadPermalink = threadRaw ? unwrapLink(threadRaw) : threadRaw;
     const where = threadPermalink ? resolveThread(ctx, threadPermalink) : null;
     const answer = where && !isError(where) ? await personLineIn(ctx, where, input.answer_permalink, "Answer:") : null;
     if (!answer) return refused("W-12", w12Message("Answer:"));
