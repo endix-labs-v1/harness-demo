@@ -13,7 +13,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from linear import (LINEAR_CREDENTIAL, Linear, _default_send, _fence, _key_in, _main,  # noqa: E402
                     umbrella_of)
 
-ENV = ("GITHUB_EVENT_PATH", LINEAR_CREDENTIAL, "SLACK_ACTIONS_WEBHOOK_URL", "LINEAR_TEAM_ID", "LINEAR_PROJECT_ID")
+ENV = ("GITHUB_EVENT_PATH", LINEAR_CREDENTIAL, "LINEAR_TEAM_ID", "LINEAR_PROJECT_ID")
 
 
 def post_webhook(url: str, text: str, send=None) -> None:
@@ -59,7 +59,12 @@ def run(event: dict, env: dict, linear: Linear, post=post_webhook) -> int:
 
     made = linear.create_issue(team_id=team, project_id=project, state_id=linear.state_id(team, "Todo"),
                                title=f"F2-02 · Check (no umbrella): {title}", description=description)
-    post(env["SLACK_ACTIONS_WEBHOOK_URL"], f"Discussion with no umbrella key: {url} · opened by {login}")
+    hook = (env.get("SLACK_ACTIONS_WEBHOOK_URL") or "").strip()
+    if not hook:
+        # The Endix Actions Slack app is not installed (the workspace's app limit); the issue still files.
+        print(f"Filed {made['identifier']} with no umbrella; SLACK_ACTIONS_WEBHOOK_URL is empty, so nothing was posted")
+        return 0
+    post(hook, f"Discussion with no umbrella key: {url} · opened by {login}")
     print(f"Filed {made['identifier']} with no umbrella; posted to #demo-lighthouse")
     return 0
 

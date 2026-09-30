@@ -311,7 +311,7 @@ def test_missing_env_names_only(monkeypatch, tmp_path, capsys):
     assert discussion_check.main(send=FakeSend()) == 1
     assert capsys.readouterr().err == (
         "Missing env: GITHUB_EVENT_PATH, LINEAR_ACTIONS_CLIENT_ID and LINEAR_ACTIONS_CLIENT_SECRET "
-        "(or LINEAR_ACTIONS_TOKEN), SLACK_ACTIONS_WEBHOOK_URL, LINEAR_TEAM_ID, LINEAR_PROJECT_ID\n")
+        "(or LINEAR_ACTIONS_TOKEN), LINEAR_TEAM_ID, LINEAR_PROJECT_ID\n")
     assert merge_docs.main(send=FakeSend()) == 1
     assert capsys.readouterr().err == (
         "Missing env: GITHUB_EVENT_PATH, LINEAR_ACTIONS_CLIENT_ID and LINEAR_ACTIONS_CLIENT_SECRET "
@@ -322,7 +322,7 @@ def test_missing_env_names_only(monkeypatch, tmp_path, capsys):
             LINEAR_ACTIONS_CLIENT_ID=CLIENT_ID, LINEAR_ACTIONS_CLIENT_SECRET=CLIENT_CS)
     assert discussion_check.main(send=fake) == 1
     out, err = capsys.readouterr()
-    assert err == "Missing env: SLACK_ACTIONS_WEBHOOK_URL, LINEAR_TEAM_ID, LINEAR_PROJECT_ID\n"
+    assert err == "Missing env: LINEAR_TEAM_ID, LINEAR_PROJECT_ID\n"
     assert_no_values(out, err)
 
     set_env(monkeypatch, tmp_path, GITHUB_EVENT_PATH="event.json", LINEAR_ACTIONS_CLIENT_ID=CLIENT_ID)
@@ -451,3 +451,12 @@ def test_workflows_text():
         lines = (ROOT / ".github" / "workflows" / name).read_text().splitlines()
         for line in block.splitlines():
             assert line in lines, f"{name}: {line!r}"
+
+
+def test_no_key_without_webhook_still_files():
+    """No ID · With no Endix Actions webhook (the workspace's app limit), a no-key Discussion still files its check issue and posts nothing."""
+    fake = FakeSend()
+    env = dict(ENV); env.pop("SLACK_ACTIONS_WEBHOOK_URL", None)
+    posted = []
+    code = discussion_check.run(discussion(n=77, body="no key here"), env, Linear(TOKEN, send=fake), post=lambda u, t: posted.append(t))
+    assert code == 0 and posted == [] and len(fake.created) == 1
